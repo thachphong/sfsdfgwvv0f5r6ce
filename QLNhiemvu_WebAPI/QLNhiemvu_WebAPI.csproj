@@ -63,6 +63,7 @@
     <Content Include="Functions\LoaiThutuc.aspx" />
     <Content Include="Functions\LoaiThutuc_Huongdan.aspx" />
     <Content Include="Functions\LoaiThutuc_Noidung.aspx" />
+    <Content Include="Functions\LoaiThutuc_Truongdulieu.aspx" />
     <Content Include="packages.config" />
     <Content Include="DAL\DB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -79,7 +80,9 @@
   <ItemGroup>
     <Content Include="Functions\index.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasePage.cs">
@@ -118,6 +121,13 @@
     </Compile>
     <Compile Include="Functions\LoaiThutuc_Noidung.aspx.designer.cs">
       <DependentUpon>LoaiThutuc_Noidung.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Functions\LoaiThutuc_Truongdulieu.aspx.cs">
+      <DependentUpon>LoaiThutuc_Truongdulieu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Functions\LoaiThutuc_Truongdulieu.aspx.designer.cs">
+      <DependentUpon>LoaiThutuc_Truongdulieu.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

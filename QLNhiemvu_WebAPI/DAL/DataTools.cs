@@ -2,6 +2,7 @@
 using QLNhiemvu_DBEntities;
 using System;
 using System.Collections.Generic;
+using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Web;
 
@@ -444,6 +445,225 @@ namespace QLNhiemvu_WebAPI.DAL
             {
                 Log.write(ex);
                 return int.MinValue;
+            }
+        }
+
+        #endregion
+
+        #region DM_LoaiThutucNhiemvu_Truongdulieu
+
+        public List<DM_LoaiThutucNhiemvu_Truongdulieu> LoaiThutucNhiemvu_Truongdulieu_GetList()
+        {
+            try
+            {
+                var list = db.DBDM0162s.Where(o => !o.DM016221);
+                if (list.Count() == 0) return null;
+
+                List<DM_LoaiThutucNhiemvu_Truongdulieu> result = new List<DM_LoaiThutucNhiemvu_Truongdulieu>();
+                foreach (DBDM0162 obj in list.OrderByDescending(o => o.DM016207))
+                {
+                    //DBDM0160 loaiThutuc = db.DBDM0160s.FirstOrDefault(o => o.DM016001 == obj.DM016202);
+                    //if (loaiThutuc == null) continue;
+
+                    result.Add(new DM_LoaiThutucNhiemvu_Truongdulieu()
+                    {
+                        DM016201 = obj.DM016201,
+                        DM016204 = obj.DM016204,
+                        DM016205 = obj.DM016205,
+                        DM016206 = obj.DM016206,
+                        DM016207 = obj.DM016207,
+                        DM016208 = (int)obj.DM016208,
+                        DM016209 = obj.DM016209,
+                        DM016210 = obj.DM016210,
+                        DM016211 = obj.DM016211,
+                        DM016212 = obj.DM016212,
+                        DM016213 = obj.DM016213,
+                        DM016214 = obj.DM016214,
+                        DM016215 = obj.DM016215,
+                        DM016217 = obj.DM016217,
+                        DM016218 = obj.DM016218,
+                        DM016219 = obj.DM016219,
+                        DM016220 = obj.DM016220,
+                        IsChecked = false,
+                        Cachnhap = string.Empty,
+                        Kieutruong =
+                            obj.DM016207.Trim() == "1" ? "Text" :
+                            obj.DM016207.Trim() == "2" ? "Number" :
+                            obj.DM016207.Trim() == "3" ? "Yes/No" :
+                            obj.DM016207.Trim() == "4" ? "Date" :
+                            obj.DM016207.Trim() == "5" ? "Datetime" :
+                            obj.DM016207.Trim() == "6" ? "Time" :
+                            obj.DM016207.Trim() == "7" ? "Memo" :
+                            obj.DM016207.Trim() == "8" ? "Lookup" :
+                            obj.DM016207.Trim() == "9" ? "Tab" :
+                            obj.DM016207.Trim() == "10" ? "Image" :
+                            "NONE",
+                        NguoiCapnhat = "Nguyễn văn XXX",
+                        NguoiTao = "Nguyễn văn XXX"
+                    });
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        public int LoaiThutucNhiemvu_Truongdulieu_Create(DM_LoaiThutucNhiemvu_Truongdulieu obj)
+        {
+            try
+            {
+                DBDM0162 checkObj = db.DBDM0162s.FirstOrDefault(o => !o.DM016221 && o.DM016204 == obj.DM016204);
+                if (checkObj != null)
+                    return 1;//Trung Ma so
+
+                checkObj = db.DBDM0162s.FirstOrDefault(o => !o.DM016221 && o.DM016205 == obj.DM016205);
+                if (checkObj != null)
+                    return 2;//Trung Ten
+
+                db.DBDM0162s.InsertOnSubmit(new DBDM0162()
+                {
+                    DM016201 = obj.DM016201,
+                    DM016204 = obj.DM016204,
+                    DM016205 = obj.DM016205,
+                    DM016206 = obj.DM016206,
+                    DM016207 = obj.DM016207.Trim(),
+                    DM016208 = obj.DM016208,
+                    DM016209 = obj.DM016209,
+                    DM016210 = obj.DM016210,
+                    DM016211 = obj.DM016211,
+                    DM016212 = obj.DM016212,
+                    DM016213 = obj.DM016213,
+                    DM016214 = obj.DM016214,
+                    DM016215 = obj.DM016215,
+                    DM016217 = obj.DM016217,
+                    DM016218 = obj.DM016218,
+                    DM016219 = obj.DM016219,
+                    DM016220 = obj.DM016220,
+                    DM016221 = false,
+                });
+                db.SubmitChanges();
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return int.MinValue;
+            }
+        }
+
+        public int LoaiThutucNhiemvu_Truongdulieu_Update(DM_LoaiThutucNhiemvu_Truongdulieu obj)
+        {
+            try
+            {
+                DBDM0162 updateObj = db.DBDM0162s.FirstOrDefault(o => o.DM016201 == obj.DM016201);
+                if (updateObj == null) return -1;
+
+                DBDM0162 checkObj = db.DBDM0162s.FirstOrDefault(o => !o.DM016221 && o.DM016201 != obj.DM016201 && o.DM016204 == obj.DM016204);
+                if (checkObj != null)
+                    return 1;//Trung Ma so
+
+                checkObj = db.DBDM0162s.FirstOrDefault(o => !o.DM016221 && o.DM016201 != obj.DM016201 && o.DM016205 == obj.DM016205);
+                if (checkObj != null)
+                    return 2;//Trung Ten
+
+                updateObj.DM016204 = obj.DM016204;
+                updateObj.DM016205 = obj.DM016205;
+                updateObj.DM016206 = obj.DM016206;
+                updateObj.DM016207 = obj.DM016207;
+                updateObj.DM016208 = obj.DM016208;
+                updateObj.DM016209 = obj.DM016209;
+                updateObj.DM016210 = obj.DM016210;
+                updateObj.DM016211 = obj.DM016211;
+                updateObj.DM016212 = obj.DM016212;
+                updateObj.DM016213 = obj.DM016213;
+                updateObj.DM016214 = obj.DM016214;
+                updateObj.DM016215 = obj.DM016215;
+                updateObj.DM016219 = obj.DM016219;
+                updateObj.DM016220 = obj.DM016220;
+                db.SubmitChanges();
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return int.MinValue;
+            }
+        }
+
+        public int LoaiThutucNhiemvu_Truongdulieu_Delete(Guid id)
+        {
+            try
+            {
+                DBDM0162 obj = db.DBDM0162s.FirstOrDefault(o => o.DM016201 == id);
+                if (obj == null) return -1;
+
+                obj.DM016221 = true;
+                db.SubmitChanges();
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return int.MinValue;
+            }
+        }
+
+        #endregion
+
+        #region DB Master
+
+        public List<string> DBMaster_GetTables(string prefix)
+        {
+            try
+            {
+                var list = db.Mapping.GetTables();
+                if (list == null || list.Count() == 0) return null;
+
+                List<string> result = new List<string>();
+                foreach (MetaTable obj in list)
+                {
+                    if (obj.RowType.Name.IndexOf(prefix) == 0)
+                        result.Add(obj.RowType.Name);
+                }
+
+                return result.Count == 0 ? null : result;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        public List<string> DBMaster_GetTableColumns(string tableName)
+        {
+            try
+            {
+                var list = db.Mapping.GetTables();
+                if (list == null || list.Count() == 0) return null;
+
+                MetaTable table = list.FirstOrDefault(o => o.RowType.Name.Trim() == tableName.Trim());
+                if (table == null) return null;
+
+                List<string> result = new List<string>();
+                foreach (MetaDataMember column in table.RowType.DataMembers)
+                {
+                    if (column.Association == null)
+                        result.Add(column.Name);
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
             }
         }
 
