@@ -1,30 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLNV" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=QLNV;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="QLNVConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Authentications" Member="Authentications">
-    <Type Name="Authentication">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Description" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="ListIPs" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.DBDM0163" Member="DBDM0163s">
-    <Type Name="DBDM0163">
-      <Column Name="DM016301" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="DM016302" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="DM016303" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="DM016304" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="DM016305" Type="System.Char" DbType="NChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="DM016306" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="DM016307" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="DM016308" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="DM016309" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="DM016310" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="DBDM0160_DBDM0163" Member="DBDM0160" ThisKey="DM016302" OtherKey="DM016001" Type="DBDM0160" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.DBDM0160" Member="DBDM0160s">
     <Type Name="DBDM0160">
       <Column Name="DM016001" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -37,10 +12,24 @@
       <Column Name="DM016008" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="DM016009" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="DM016010" Type="System.Char" DbType="NChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="DM016011" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="DBDM0160_DBDM0163" Member="DBDM0163s" ThisKey="DM016001" OtherKey="DM016302" Type="DBDM0163" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="DBDM0160_DBDM0161" Member="DBDM0161s" ThisKey="DM016001" OtherKey="DM016102" Type="DBDM0161" />
+      <Association Name="DBDM0160_DBDM0163" Member="DBDM0163s" ThisKey="DM016001" OtherKey="DM016302" Type="DBDM0163" />
       <Association Name="DBDM0160_DBDM0164" Member="DBDM0164s" ThisKey="DM016001" OtherKey="DM016402" Type="DBDM0164" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DBDM0166" Member="DBDM0166s">
+    <Type Name="DBDM0166">
+      <Column Name="DM016601" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DM016602" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="DM016603" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="DM016604" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="DM016605" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DM016606" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="DM016607" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="DBDM0162_DBDM0166" Member="DBDM0162" ThisKey="DM016602" OtherKey="DM016201" Type="DBDM0162" IsForeignKey="true" />
+      <Association Name="DBDM0162_DBDM01661" Member="DBDM01621" ThisKey="DM016603" OtherKey="DM016201" Type="DBDM0162" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.DBDM0161" Member="DBDM0161s">
@@ -55,7 +44,7 @@
       <Column Name="DM016108" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="DM016109" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="DM016110" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="DM016111" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="DBDM0161_DBDM0165" Member="DBDM0165s" ThisKey="DM016101" OtherKey="DM016502" Type="DBDM0165" />
       <Association Name="DBDM0160_DBDM0161" Member="DBDM0160" ThisKey="DM016102" OtherKey="DM016001" Type="DBDM0160" IsForeignKey="true" />
     </Type>
@@ -69,9 +58,7 @@
       <Column Name="DM016207" Type="System.String" DbType="NChar(2) NOT NULL" CanBeNull="false" />
       <Column Name="DM016208" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="DM016209" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
-      <Column Name="DM016210" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="DM016211" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="DM016212" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DM016210" Type="System.String" DbType="NText" CanBeNull="true" />
       <Column Name="DM016213" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="DM016214" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="DM016215" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
@@ -79,11 +66,26 @@
       <Column Name="DM016218" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="DM016219" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="DM016220" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="DM016221" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="DBDM0162_DBDM0164" Member="DBDM0164s" ThisKey="DM016201" OtherKey="DM016403" Type="DBDM0164" />
-      <Association Name="DBDM0162_DBDM0165" Member="DBDM0165s" ThisKey="DM016201" OtherKey="DM016503" Type="DBDM0165" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="DBDM0162_DBDM0166" Member="DBDM0166s" ThisKey="DM016201" OtherKey="DM016602" Type="DBDM0166" />
       <Association Name="DBDM0162_DBDM01661" Member="DBDM0166s1" ThisKey="DM016201" OtherKey="DM016603" Type="DBDM0166" />
+      <Association Name="DBDM0162_DBDM0164" Member="DBDM0164s" ThisKey="DM016201" OtherKey="DM016403" Type="DBDM0164" />
+      <Association Name="DBDM0162_DBDM0165" Member="DBDM0165s" ThisKey="DM016201" OtherKey="DM016503" Type="DBDM0165" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DBDM0163" Member="DBDM0163s">
+    <Type Name="DBDM0163">
+      <Column Name="DM016301" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DM016302" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="DM016303" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="DM016304" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="DM016305" Type="System.Char" DbType="NChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="DM016306" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="DM016307" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DM016308" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="DM016309" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="DBDM0160_DBDM0163" Member="DBDM0160" ThisKey="DM016302" OtherKey="DM016001" Type="DBDM0160" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.DBDM0164" Member="DBDM0164s">
@@ -95,23 +97,9 @@
       <Column Name="DM016405" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="DM016406" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="DM016407" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="DM016408" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="DBDM0160_DBDM0164" Member="DBDM0160" ThisKey="DM016402" OtherKey="DM016001" Type="DBDM0160" IsForeignKey="true" />
       <Association Name="DBDM0162_DBDM0164" Member="DBDM0162" ThisKey="DM016403" OtherKey="DM016201" Type="DBDM0162" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.DBDM0166" Member="DBDM0166s">
-    <Type Name="DBDM0166">
-      <Column Name="DM016601" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="DM016602" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="DM016603" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="DM016604" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="DM016605" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="DM016606" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="DM016607" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="DM016608" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="DBDM0162_DBDM0166" Member="DBDM0162" ThisKey="DM016602" OtherKey="DM016201" Type="DBDM0162" IsForeignKey="true" />
-      <Association Name="DBDM0162_DBDM01661" Member="DBDM01621" ThisKey="DM016603" OtherKey="DM016201" Type="DBDM0162" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.DBDM0165" Member="DBDM0165s">
@@ -123,9 +111,19 @@
       <Column Name="DM016505" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="DM016506" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="DM016507" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="DM016508" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="DBDM0161_DBDM0165" Member="DBDM0161" ThisKey="DM016502" OtherKey="DM016101" Type="DBDM0161" IsForeignKey="true" />
       <Association Name="DBDM0162_DBDM0165" Member="DBDM0162" ThisKey="DM016503" OtherKey="DM016201" Type="DBDM0162" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Authentications" Member="Authentications">
+    <Type Name="Authentication">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ListIPs" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

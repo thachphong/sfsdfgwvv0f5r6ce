@@ -201,7 +201,7 @@ namespace QLNhiemvu_WebAPI.Functions
 
             using (DataTools dataTools = new DataTools())
             {
-                List<string> result = dataTools.DBMaster_GetTableColumns(tableName);
+                List<string> result = dataTools.DBMaster_GetTableColumns(tableName, "DM");
 
                 DoResponse(new APIResponseData()
                 {

@@ -30,30 +30,30 @@ namespace QLNhiemvu_WebAPI.DAL
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertAuthentication(Authentication instance);
-    partial void UpdateAuthentication(Authentication instance);
-    partial void DeleteAuthentication(Authentication instance);
-    partial void InsertDBDM0163(DBDM0163 instance);
-    partial void UpdateDBDM0163(DBDM0163 instance);
-    partial void DeleteDBDM0163(DBDM0163 instance);
     partial void InsertDBDM0160(DBDM0160 instance);
     partial void UpdateDBDM0160(DBDM0160 instance);
     partial void DeleteDBDM0160(DBDM0160 instance);
+    partial void InsertDBDM0166(DBDM0166 instance);
+    partial void UpdateDBDM0166(DBDM0166 instance);
+    partial void DeleteDBDM0166(DBDM0166 instance);
     partial void InsertDBDM0161(DBDM0161 instance);
     partial void UpdateDBDM0161(DBDM0161 instance);
     partial void DeleteDBDM0161(DBDM0161 instance);
     partial void InsertDBDM0162(DBDM0162 instance);
     partial void UpdateDBDM0162(DBDM0162 instance);
     partial void DeleteDBDM0162(DBDM0162 instance);
+    partial void InsertDBDM0163(DBDM0163 instance);
+    partial void UpdateDBDM0163(DBDM0163 instance);
+    partial void DeleteDBDM0163(DBDM0163 instance);
     partial void InsertDBDM0164(DBDM0164 instance);
     partial void UpdateDBDM0164(DBDM0164 instance);
     partial void DeleteDBDM0164(DBDM0164 instance);
-    partial void InsertDBDM0166(DBDM0166 instance);
-    partial void UpdateDBDM0166(DBDM0166 instance);
-    partial void DeleteDBDM0166(DBDM0166 instance);
     partial void InsertDBDM0165(DBDM0165 instance);
     partial void UpdateDBDM0165(DBDM0165 instance);
     partial void DeleteDBDM0165(DBDM0165 instance);
+    partial void InsertAuthentication(Authentication instance);
+    partial void UpdateAuthentication(Authentication instance);
+    partial void DeleteAuthentication(Authentication instance);
     #endregion
 		
 		public DBDataContext() : 
@@ -86,27 +86,19 @@ namespace QLNhiemvu_WebAPI.DAL
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Authentication> Authentications
-		{
-			get
-			{
-				return this.GetTable<Authentication>();
-			}
-		}
-		
-		public System.Data.Linq.Table<DBDM0163> DBDM0163s
-		{
-			get
-			{
-				return this.GetTable<DBDM0163>();
-			}
-		}
-		
 		public System.Data.Linq.Table<DBDM0160> DBDM0160s
 		{
 			get
 			{
 				return this.GetTable<DBDM0160>();
+			}
+		}
+		
+		public System.Data.Linq.Table<DBDM0166> DBDM0166s
+		{
+			get
+			{
+				return this.GetTable<DBDM0166>();
 			}
 		}
 		
@@ -126,19 +118,19 @@ namespace QLNhiemvu_WebAPI.DAL
 			}
 		}
 		
+		public System.Data.Linq.Table<DBDM0163> DBDM0163s
+		{
+			get
+			{
+				return this.GetTable<DBDM0163>();
+			}
+		}
+		
 		public System.Data.Linq.Table<DBDM0164> DBDM0164s
 		{
 			get
 			{
 				return this.GetTable<DBDM0164>();
-			}
-		}
-		
-		public System.Data.Linq.Table<DBDM0166> DBDM0166s
-		{
-			get
-			{
-				return this.GetTable<DBDM0166>();
 			}
 		}
 		
@@ -149,505 +141,12 @@ namespace QLNhiemvu_WebAPI.DAL
 				return this.GetTable<DBDM0165>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Authentications")]
-	public partial class Authentication : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Username;
-		
-		private string _Password;
-		
-		private string _Description;
-		
-		private string _ListIPs;
-		
-		private bool _IsActive;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnListIPsChanging(string value);
-    partial void OnListIPsChanged();
-    partial void OnIsActiveChanging(bool value);
-    partial void OnIsActiveChanged();
-    #endregion
-		
-		public Authentication()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		public System.Data.Linq.Table<Authentication> Authentications
 		{
 			get
 			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					this.OnUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string Description
-		{
-			get
-			{
-				return this._Description;
-			}
-			set
-			{
-				if ((this._Description != value))
-				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListIPs", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string ListIPs
-		{
-			get
-			{
-				return this._ListIPs;
-			}
-			set
-			{
-				if ((this._ListIPs != value))
-				{
-					this.OnListIPsChanging(value);
-					this.SendPropertyChanging();
-					this._ListIPs = value;
-					this.SendPropertyChanged("ListIPs");
-					this.OnListIPsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
-		public bool IsActive
-		{
-			get
-			{
-				return this._IsActive;
-			}
-			set
-			{
-				if ((this._IsActive != value))
-				{
-					this.OnIsActiveChanging(value);
-					this.SendPropertyChanging();
-					this._IsActive = value;
-					this.SendPropertyChanged("IsActive");
-					this.OnIsActiveChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DBDM0163")]
-	public partial class DBDM0163 : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _DM016301;
-		
-		private System.Guid _DM016302;
-		
-		private string _DM016303;
-		
-		private string _DM016304;
-		
-		private char _DM016305;
-		
-		private System.Guid _DM016306;
-		
-		private System.DateTime _DM016307;
-		
-		private System.Guid _DM016308;
-		
-		private System.DateTime _DM016309;
-		
-		private bool _DM016310;
-		
-		private EntityRef<DBDM0160> _DBDM0160;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnDM016301Changing(System.Guid value);
-    partial void OnDM016301Changed();
-    partial void OnDM016302Changing(System.Guid value);
-    partial void OnDM016302Changed();
-    partial void OnDM016303Changing(string value);
-    partial void OnDM016303Changed();
-    partial void OnDM016304Changing(string value);
-    partial void OnDM016304Changed();
-    partial void OnDM016305Changing(char value);
-    partial void OnDM016305Changed();
-    partial void OnDM016306Changing(System.Guid value);
-    partial void OnDM016306Changed();
-    partial void OnDM016307Changing(System.DateTime value);
-    partial void OnDM016307Changed();
-    partial void OnDM016308Changing(System.Guid value);
-    partial void OnDM016308Changed();
-    partial void OnDM016309Changing(System.DateTime value);
-    partial void OnDM016309Changed();
-    partial void OnDM016310Changing(bool value);
-    partial void OnDM016310Changed();
-    #endregion
-		
-		public DBDM0163()
-		{
-			this._DBDM0160 = default(EntityRef<DBDM0160>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016301", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid DM016301
-		{
-			get
-			{
-				return this._DM016301;
-			}
-			set
-			{
-				if ((this._DM016301 != value))
-				{
-					this.OnDM016301Changing(value);
-					this.SendPropertyChanging();
-					this._DM016301 = value;
-					this.SendPropertyChanged("DM016301");
-					this.OnDM016301Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016302", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid DM016302
-		{
-			get
-			{
-				return this._DM016302;
-			}
-			set
-			{
-				if ((this._DM016302 != value))
-				{
-					if (this._DBDM0160.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDM016302Changing(value);
-					this.SendPropertyChanging();
-					this._DM016302 = value;
-					this.SendPropertyChanged("DM016302");
-					this.OnDM016302Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016303", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
-		public string DM016303
-		{
-			get
-			{
-				return this._DM016303;
-			}
-			set
-			{
-				if ((this._DM016303 != value))
-				{
-					this.OnDM016303Changing(value);
-					this.SendPropertyChanging();
-					this._DM016303 = value;
-					this.SendPropertyChanged("DM016303");
-					this.OnDM016303Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016304", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string DM016304
-		{
-			get
-			{
-				return this._DM016304;
-			}
-			set
-			{
-				if ((this._DM016304 != value))
-				{
-					this.OnDM016304Changing(value);
-					this.SendPropertyChanging();
-					this._DM016304 = value;
-					this.SendPropertyChanged("DM016304");
-					this.OnDM016304Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016305", DbType="NChar(1) NOT NULL")]
-		public char DM016305
-		{
-			get
-			{
-				return this._DM016305;
-			}
-			set
-			{
-				if ((this._DM016305 != value))
-				{
-					this.OnDM016305Changing(value);
-					this.SendPropertyChanging();
-					this._DM016305 = value;
-					this.SendPropertyChanged("DM016305");
-					this.OnDM016305Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016306", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid DM016306
-		{
-			get
-			{
-				return this._DM016306;
-			}
-			set
-			{
-				if ((this._DM016306 != value))
-				{
-					this.OnDM016306Changing(value);
-					this.SendPropertyChanging();
-					this._DM016306 = value;
-					this.SendPropertyChanged("DM016306");
-					this.OnDM016306Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016307", DbType="DateTime NOT NULL")]
-		public System.DateTime DM016307
-		{
-			get
-			{
-				return this._DM016307;
-			}
-			set
-			{
-				if ((this._DM016307 != value))
-				{
-					this.OnDM016307Changing(value);
-					this.SendPropertyChanging();
-					this._DM016307 = value;
-					this.SendPropertyChanged("DM016307");
-					this.OnDM016307Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016308", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid DM016308
-		{
-			get
-			{
-				return this._DM016308;
-			}
-			set
-			{
-				if ((this._DM016308 != value))
-				{
-					this.OnDM016308Changing(value);
-					this.SendPropertyChanging();
-					this._DM016308 = value;
-					this.SendPropertyChanged("DM016308");
-					this.OnDM016308Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016309", DbType="DateTime NOT NULL")]
-		public System.DateTime DM016309
-		{
-			get
-			{
-				return this._DM016309;
-			}
-			set
-			{
-				if ((this._DM016309 != value))
-				{
-					this.OnDM016309Changing(value);
-					this.SendPropertyChanging();
-					this._DM016309 = value;
-					this.SendPropertyChanged("DM016309");
-					this.OnDM016309Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016310", DbType="Bit NOT NULL")]
-		public bool DM016310
-		{
-			get
-			{
-				return this._DM016310;
-			}
-			set
-			{
-				if ((this._DM016310 != value))
-				{
-					this.OnDM016310Changing(value);
-					this.SendPropertyChanging();
-					this._DM016310 = value;
-					this.SendPropertyChanged("DM016310");
-					this.OnDM016310Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0160_DBDM0163", Storage="_DBDM0160", ThisKey="DM016302", OtherKey="DM016001", IsForeignKey=true)]
-		public DBDM0160 DBDM0160
-		{
-			get
-			{
-				return this._DBDM0160.Entity;
-			}
-			set
-			{
-				DBDM0160 previousValue = this._DBDM0160.Entity;
-				if (((previousValue != value) 
-							|| (this._DBDM0160.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DBDM0160.Entity = null;
-						previousValue.DBDM0163s.Remove(this);
-					}
-					this._DBDM0160.Entity = value;
-					if ((value != null))
-					{
-						value.DBDM0163s.Add(this);
-						this._DM016302 = value.DM016001;
-					}
-					else
-					{
-						this._DM016302 = default(System.Guid);
-					}
-					this.SendPropertyChanged("DBDM0160");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this.GetTable<Authentication>();
 			}
 		}
 	}
@@ -678,11 +177,11 @@ namespace QLNhiemvu_WebAPI.DAL
 		
 		private char _DM016010;
 		
-		private bool _DM016011;
-		
-		private EntitySet<DBDM0163> _DBDM0163s;
+		private bool _IsDeleted;
 		
 		private EntitySet<DBDM0161> _DBDM0161s;
+		
+		private EntitySet<DBDM0163> _DBDM0163s;
 		
 		private EntitySet<DBDM0164> _DBDM0164s;
 		
@@ -710,14 +209,14 @@ namespace QLNhiemvu_WebAPI.DAL
     partial void OnDM016009Changed();
     partial void OnDM016010Changing(char value);
     partial void OnDM016010Changed();
-    partial void OnDM016011Changing(bool value);
-    partial void OnDM016011Changed();
+    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanged();
     #endregion
 		
 		public DBDM0160()
 		{
-			this._DBDM0163s = new EntitySet<DBDM0163>(new Action<DBDM0163>(this.attach_DBDM0163s), new Action<DBDM0163>(this.detach_DBDM0163s));
 			this._DBDM0161s = new EntitySet<DBDM0161>(new Action<DBDM0161>(this.attach_DBDM0161s), new Action<DBDM0161>(this.detach_DBDM0161s));
+			this._DBDM0163s = new EntitySet<DBDM0163>(new Action<DBDM0163>(this.attach_DBDM0163s), new Action<DBDM0163>(this.detach_DBDM0163s));
 			this._DBDM0164s = new EntitySet<DBDM0164>(new Action<DBDM0164>(this.attach_DBDM0164s), new Action<DBDM0164>(this.detach_DBDM0164s));
 			OnCreated();
 		}
@@ -922,36 +421,23 @@ namespace QLNhiemvu_WebAPI.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016011", DbType="Bit NOT NULL")]
-		public bool DM016011
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
+		public bool IsDeleted
 		{
 			get
 			{
-				return this._DM016011;
+				return this._IsDeleted;
 			}
 			set
 			{
-				if ((this._DM016011 != value))
+				if ((this._IsDeleted != value))
 				{
-					this.OnDM016011Changing(value);
+					this.OnIsDeletedChanging(value);
 					this.SendPropertyChanging();
-					this._DM016011 = value;
-					this.SendPropertyChanged("DM016011");
-					this.OnDM016011Changed();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0160_DBDM0163", Storage="_DBDM0163s", ThisKey="DM016001", OtherKey="DM016302")]
-		public EntitySet<DBDM0163> DBDM0163s
-		{
-			get
-			{
-				return this._DBDM0163s;
-			}
-			set
-			{
-				this._DBDM0163s.Assign(value);
 			}
 		}
 		
@@ -965,6 +451,19 @@ namespace QLNhiemvu_WebAPI.DAL
 			set
 			{
 				this._DBDM0161s.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0160_DBDM0163", Storage="_DBDM0163s", ThisKey="DM016001", OtherKey="DM016302")]
+		public EntitySet<DBDM0163> DBDM0163s
+		{
+			get
+			{
+				return this._DBDM0163s;
+			}
+			set
+			{
+				this._DBDM0163s.Assign(value);
 			}
 		}
 		
@@ -1001,18 +500,6 @@ namespace QLNhiemvu_WebAPI.DAL
 			}
 		}
 		
-		private void attach_DBDM0163s(DBDM0163 entity)
-		{
-			this.SendPropertyChanging();
-			entity.DBDM0160 = this;
-		}
-		
-		private void detach_DBDM0163s(DBDM0163 entity)
-		{
-			this.SendPropertyChanging();
-			entity.DBDM0160 = null;
-		}
-		
 		private void attach_DBDM0161s(DBDM0161 entity)
 		{
 			this.SendPropertyChanging();
@@ -1020,6 +507,18 @@ namespace QLNhiemvu_WebAPI.DAL
 		}
 		
 		private void detach_DBDM0161s(DBDM0161 entity)
+		{
+			this.SendPropertyChanging();
+			entity.DBDM0160 = null;
+		}
+		
+		private void attach_DBDM0163s(DBDM0163 entity)
+		{
+			this.SendPropertyChanging();
+			entity.DBDM0160 = this;
+		}
+		
+		private void detach_DBDM0163s(DBDM0163 entity)
 		{
 			this.SendPropertyChanging();
 			entity.DBDM0160 = null;
@@ -1035,6 +534,318 @@ namespace QLNhiemvu_WebAPI.DAL
 		{
 			this.SendPropertyChanging();
 			entity.DBDM0160 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DBDM0166")]
+	public partial class DBDM0166 : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _DM016601;
+		
+		private System.Guid _DM016602;
+		
+		private System.Guid _DM016603;
+		
+		private System.Guid _DM016604;
+		
+		private System.DateTime _DM016605;
+		
+		private System.Guid _DM016606;
+		
+		private System.DateTime _DM016607;
+		
+		private bool _IsDeleted;
+		
+		private EntityRef<DBDM0162> _DBDM0162;
+		
+		private EntityRef<DBDM0162> _DBDM01621;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDM016601Changing(System.Guid value);
+    partial void OnDM016601Changed();
+    partial void OnDM016602Changing(System.Guid value);
+    partial void OnDM016602Changed();
+    partial void OnDM016603Changing(System.Guid value);
+    partial void OnDM016603Changed();
+    partial void OnDM016604Changing(System.Guid value);
+    partial void OnDM016604Changed();
+    partial void OnDM016605Changing(System.DateTime value);
+    partial void OnDM016605Changed();
+    partial void OnDM016606Changing(System.Guid value);
+    partial void OnDM016606Changed();
+    partial void OnDM016607Changing(System.DateTime value);
+    partial void OnDM016607Changed();
+    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanged();
+    #endregion
+		
+		public DBDM0166()
+		{
+			this._DBDM0162 = default(EntityRef<DBDM0162>);
+			this._DBDM01621 = default(EntityRef<DBDM0162>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016601", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid DM016601
+		{
+			get
+			{
+				return this._DM016601;
+			}
+			set
+			{
+				if ((this._DM016601 != value))
+				{
+					this.OnDM016601Changing(value);
+					this.SendPropertyChanging();
+					this._DM016601 = value;
+					this.SendPropertyChanged("DM016601");
+					this.OnDM016601Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016602", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid DM016602
+		{
+			get
+			{
+				return this._DM016602;
+			}
+			set
+			{
+				if ((this._DM016602 != value))
+				{
+					if (this._DBDM0162.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDM016602Changing(value);
+					this.SendPropertyChanging();
+					this._DM016602 = value;
+					this.SendPropertyChanged("DM016602");
+					this.OnDM016602Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016603", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid DM016603
+		{
+			get
+			{
+				return this._DM016603;
+			}
+			set
+			{
+				if ((this._DM016603 != value))
+				{
+					if (this._DBDM01621.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDM016603Changing(value);
+					this.SendPropertyChanging();
+					this._DM016603 = value;
+					this.SendPropertyChanged("DM016603");
+					this.OnDM016603Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016604", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid DM016604
+		{
+			get
+			{
+				return this._DM016604;
+			}
+			set
+			{
+				if ((this._DM016604 != value))
+				{
+					this.OnDM016604Changing(value);
+					this.SendPropertyChanging();
+					this._DM016604 = value;
+					this.SendPropertyChanged("DM016604");
+					this.OnDM016604Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016605", DbType="DateTime NOT NULL")]
+		public System.DateTime DM016605
+		{
+			get
+			{
+				return this._DM016605;
+			}
+			set
+			{
+				if ((this._DM016605 != value))
+				{
+					this.OnDM016605Changing(value);
+					this.SendPropertyChanging();
+					this._DM016605 = value;
+					this.SendPropertyChanged("DM016605");
+					this.OnDM016605Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016606", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid DM016606
+		{
+			get
+			{
+				return this._DM016606;
+			}
+			set
+			{
+				if ((this._DM016606 != value))
+				{
+					this.OnDM016606Changing(value);
+					this.SendPropertyChanging();
+					this._DM016606 = value;
+					this.SendPropertyChanged("DM016606");
+					this.OnDM016606Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016607", DbType="DateTime NOT NULL")]
+		public System.DateTime DM016607
+		{
+			get
+			{
+				return this._DM016607;
+			}
+			set
+			{
+				if ((this._DM016607 != value))
+				{
+					this.OnDM016607Changing(value);
+					this.SendPropertyChanging();
+					this._DM016607 = value;
+					this.SendPropertyChanged("DM016607");
+					this.OnDM016607Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
+		public bool IsDeleted
+		{
+			get
+			{
+				return this._IsDeleted;
+			}
+			set
+			{
+				if ((this._IsDeleted != value))
+				{
+					this.OnIsDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0162_DBDM0166", Storage="_DBDM0162", ThisKey="DM016602", OtherKey="DM016201", IsForeignKey=true)]
+		public DBDM0162 DBDM0162
+		{
+			get
+			{
+				return this._DBDM0162.Entity;
+			}
+			set
+			{
+				DBDM0162 previousValue = this._DBDM0162.Entity;
+				if (((previousValue != value) 
+							|| (this._DBDM0162.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DBDM0162.Entity = null;
+						previousValue.DBDM0166s.Remove(this);
+					}
+					this._DBDM0162.Entity = value;
+					if ((value != null))
+					{
+						value.DBDM0166s.Add(this);
+						this._DM016602 = value.DM016201;
+					}
+					else
+					{
+						this._DM016602 = default(System.Guid);
+					}
+					this.SendPropertyChanged("DBDM0162");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0162_DBDM01661", Storage="_DBDM01621", ThisKey="DM016603", OtherKey="DM016201", IsForeignKey=true)]
+		public DBDM0162 DBDM01621
+		{
+			get
+			{
+				return this._DBDM01621.Entity;
+			}
+			set
+			{
+				DBDM0162 previousValue = this._DBDM01621.Entity;
+				if (((previousValue != value) 
+							|| (this._DBDM01621.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DBDM01621.Entity = null;
+						previousValue.DBDM0166s1.Remove(this);
+					}
+					this._DBDM01621.Entity = value;
+					if ((value != null))
+					{
+						value.DBDM0166s1.Add(this);
+						this._DM016603 = value.DM016201;
+					}
+					else
+					{
+						this._DM016603 = default(System.Guid);
+					}
+					this.SendPropertyChanged("DBDM01621");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -1064,7 +875,7 @@ namespace QLNhiemvu_WebAPI.DAL
 		
 		private string _DM016110;
 		
-		private bool _DM016111;
+		private bool _IsDeleted;
 		
 		private EntitySet<DBDM0165> _DBDM0165s;
 		
@@ -1094,8 +905,8 @@ namespace QLNhiemvu_WebAPI.DAL
     partial void OnDM016109Changed();
     partial void OnDM016110Changing(string value);
     partial void OnDM016110Changed();
-    partial void OnDM016111Changing(bool value);
-    partial void OnDM016111Changed();
+    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanged();
     #endregion
 		
 		public DBDM0161()
@@ -1309,22 +1120,22 @@ namespace QLNhiemvu_WebAPI.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016111", DbType="Bit NOT NULL")]
-		public bool DM016111
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
+		public bool IsDeleted
 		{
 			get
 			{
-				return this._DM016111;
+				return this._IsDeleted;
 			}
 			set
 			{
-				if ((this._DM016111 != value))
+				if ((this._IsDeleted != value))
 				{
-					this.OnDM016111Changing(value);
+					this.OnIsDeletedChanging(value);
 					this.SendPropertyChanging();
-					this._DM016111 = value;
-					this.SendPropertyChanged("DM016111");
-					this.OnDM016111Changed();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
 				}
 			}
 		}
@@ -1431,10 +1242,6 @@ namespace QLNhiemvu_WebAPI.DAL
 		
 		private string _DM016210;
 		
-		private string _DM016211;
-		
-		private string _DM016212;
-		
 		private string _DM016213;
 		
 		private int _DM016214;
@@ -1449,15 +1256,15 @@ namespace QLNhiemvu_WebAPI.DAL
 		
 		private System.DateTime _DM016220;
 		
-		private bool _DM016221;
-		
-		private EntitySet<DBDM0164> _DBDM0164s;
-		
-		private EntitySet<DBDM0165> _DBDM0165s;
+		private bool _IsDeleted;
 		
 		private EntitySet<DBDM0166> _DBDM0166s;
 		
 		private EntitySet<DBDM0166> _DBDM0166s1;
+		
+		private EntitySet<DBDM0164> _DBDM0164s;
+		
+		private EntitySet<DBDM0165> _DBDM0165s;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1479,10 +1286,6 @@ namespace QLNhiemvu_WebAPI.DAL
     partial void OnDM016209Changed();
     partial void OnDM016210Changing(string value);
     partial void OnDM016210Changed();
-    partial void OnDM016211Changing(string value);
-    partial void OnDM016211Changed();
-    partial void OnDM016212Changing(string value);
-    partial void OnDM016212Changed();
     partial void OnDM016213Changing(string value);
     partial void OnDM016213Changed();
     partial void OnDM016214Changing(int value);
@@ -1497,16 +1300,16 @@ namespace QLNhiemvu_WebAPI.DAL
     partial void OnDM016219Changed();
     partial void OnDM016220Changing(System.DateTime value);
     partial void OnDM016220Changed();
-    partial void OnDM016221Changing(bool value);
-    partial void OnDM016221Changed();
+    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanged();
     #endregion
 		
 		public DBDM0162()
 		{
-			this._DBDM0164s = new EntitySet<DBDM0164>(new Action<DBDM0164>(this.attach_DBDM0164s), new Action<DBDM0164>(this.detach_DBDM0164s));
-			this._DBDM0165s = new EntitySet<DBDM0165>(new Action<DBDM0165>(this.attach_DBDM0165s), new Action<DBDM0165>(this.detach_DBDM0165s));
 			this._DBDM0166s = new EntitySet<DBDM0166>(new Action<DBDM0166>(this.attach_DBDM0166s), new Action<DBDM0166>(this.detach_DBDM0166s));
 			this._DBDM0166s1 = new EntitySet<DBDM0166>(new Action<DBDM0166>(this.attach_DBDM0166s1), new Action<DBDM0166>(this.detach_DBDM0166s1));
+			this._DBDM0164s = new EntitySet<DBDM0164>(new Action<DBDM0164>(this.attach_DBDM0164s), new Action<DBDM0164>(this.detach_DBDM0164s));
+			this._DBDM0165s = new EntitySet<DBDM0165>(new Action<DBDM0165>(this.attach_DBDM0165s), new Action<DBDM0165>(this.detach_DBDM0165s));
 			OnCreated();
 		}
 		
@@ -1650,7 +1453,7 @@ namespace QLNhiemvu_WebAPI.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016210", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016210", DbType="NText")]
 		public string DM016210
 		{
 			get
@@ -1666,46 +1469,6 @@ namespace QLNhiemvu_WebAPI.DAL
 					this._DM016210 = value;
 					this.SendPropertyChanged("DM016210");
 					this.OnDM016210Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016211", DbType="NVarChar(100)")]
-		public string DM016211
-		{
-			get
-			{
-				return this._DM016211;
-			}
-			set
-			{
-				if ((this._DM016211 != value))
-				{
-					this.OnDM016211Changing(value);
-					this.SendPropertyChanging();
-					this._DM016211 = value;
-					this.SendPropertyChanged("DM016211");
-					this.OnDM016211Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016212", DbType="NVarChar(100)")]
-		public string DM016212
-		{
-			get
-			{
-				return this._DM016212;
-			}
-			set
-			{
-				if ((this._DM016212 != value))
-				{
-					this.OnDM016212Changing(value);
-					this.SendPropertyChanging();
-					this._DM016212 = value;
-					this.SendPropertyChanged("DM016212");
-					this.OnDM016212Changed();
 				}
 			}
 		}
@@ -1850,49 +1613,23 @@ namespace QLNhiemvu_WebAPI.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016221", DbType="Bit NOT NULL")]
-		public bool DM016221
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
+		public bool IsDeleted
 		{
 			get
 			{
-				return this._DM016221;
+				return this._IsDeleted;
 			}
 			set
 			{
-				if ((this._DM016221 != value))
+				if ((this._IsDeleted != value))
 				{
-					this.OnDM016221Changing(value);
+					this.OnIsDeletedChanging(value);
 					this.SendPropertyChanging();
-					this._DM016221 = value;
-					this.SendPropertyChanged("DM016221");
-					this.OnDM016221Changed();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0162_DBDM0164", Storage="_DBDM0164s", ThisKey="DM016201", OtherKey="DM016403")]
-		public EntitySet<DBDM0164> DBDM0164s
-		{
-			get
-			{
-				return this._DBDM0164s;
-			}
-			set
-			{
-				this._DBDM0164s.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0162_DBDM0165", Storage="_DBDM0165s", ThisKey="DM016201", OtherKey="DM016503")]
-		public EntitySet<DBDM0165> DBDM0165s
-		{
-			get
-			{
-				return this._DBDM0165s;
-			}
-			set
-			{
-				this._DBDM0165s.Assign(value);
 			}
 		}
 		
@@ -1922,6 +1659,32 @@ namespace QLNhiemvu_WebAPI.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0162_DBDM0164", Storage="_DBDM0164s", ThisKey="DM016201", OtherKey="DM016403")]
+		public EntitySet<DBDM0164> DBDM0164s
+		{
+			get
+			{
+				return this._DBDM0164s;
+			}
+			set
+			{
+				this._DBDM0164s.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0162_DBDM0165", Storage="_DBDM0165s", ThisKey="DM016201", OtherKey="DM016503")]
+		public EntitySet<DBDM0165> DBDM0165s
+		{
+			get
+			{
+				return this._DBDM0165s;
+			}
+			set
+			{
+				this._DBDM0165s.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1940,30 +1703,6 @@ namespace QLNhiemvu_WebAPI.DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_DBDM0164s(DBDM0164 entity)
-		{
-			this.SendPropertyChanging();
-			entity.DBDM0162 = this;
-		}
-		
-		private void detach_DBDM0164s(DBDM0164 entity)
-		{
-			this.SendPropertyChanging();
-			entity.DBDM0162 = null;
-		}
-		
-		private void attach_DBDM0165s(DBDM0165 entity)
-		{
-			this.SendPropertyChanging();
-			entity.DBDM0162 = this;
-		}
-		
-		private void detach_DBDM0165s(DBDM0165 entity)
-		{
-			this.SendPropertyChanging();
-			entity.DBDM0162 = null;
 		}
 		
 		private void attach_DBDM0166s(DBDM0166 entity)
@@ -1989,6 +1728,349 @@ namespace QLNhiemvu_WebAPI.DAL
 			this.SendPropertyChanging();
 			entity.DBDM01621 = null;
 		}
+		
+		private void attach_DBDM0164s(DBDM0164 entity)
+		{
+			this.SendPropertyChanging();
+			entity.DBDM0162 = this;
+		}
+		
+		private void detach_DBDM0164s(DBDM0164 entity)
+		{
+			this.SendPropertyChanging();
+			entity.DBDM0162 = null;
+		}
+		
+		private void attach_DBDM0165s(DBDM0165 entity)
+		{
+			this.SendPropertyChanging();
+			entity.DBDM0162 = this;
+		}
+		
+		private void detach_DBDM0165s(DBDM0165 entity)
+		{
+			this.SendPropertyChanging();
+			entity.DBDM0162 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DBDM0163")]
+	public partial class DBDM0163 : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _DM016301;
+		
+		private System.Guid _DM016302;
+		
+		private string _DM016303;
+		
+		private string _DM016304;
+		
+		private char _DM016305;
+		
+		private System.Guid _DM016306;
+		
+		private System.DateTime _DM016307;
+		
+		private System.Guid _DM016308;
+		
+		private System.DateTime _DM016309;
+		
+		private bool _IsDeleted;
+		
+		private EntityRef<DBDM0160> _DBDM0160;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDM016301Changing(System.Guid value);
+    partial void OnDM016301Changed();
+    partial void OnDM016302Changing(System.Guid value);
+    partial void OnDM016302Changed();
+    partial void OnDM016303Changing(string value);
+    partial void OnDM016303Changed();
+    partial void OnDM016304Changing(string value);
+    partial void OnDM016304Changed();
+    partial void OnDM016305Changing(char value);
+    partial void OnDM016305Changed();
+    partial void OnDM016306Changing(System.Guid value);
+    partial void OnDM016306Changed();
+    partial void OnDM016307Changing(System.DateTime value);
+    partial void OnDM016307Changed();
+    partial void OnDM016308Changing(System.Guid value);
+    partial void OnDM016308Changed();
+    partial void OnDM016309Changing(System.DateTime value);
+    partial void OnDM016309Changed();
+    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanged();
+    #endregion
+		
+		public DBDM0163()
+		{
+			this._DBDM0160 = default(EntityRef<DBDM0160>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016301", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid DM016301
+		{
+			get
+			{
+				return this._DM016301;
+			}
+			set
+			{
+				if ((this._DM016301 != value))
+				{
+					this.OnDM016301Changing(value);
+					this.SendPropertyChanging();
+					this._DM016301 = value;
+					this.SendPropertyChanged("DM016301");
+					this.OnDM016301Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016302", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid DM016302
+		{
+			get
+			{
+				return this._DM016302;
+			}
+			set
+			{
+				if ((this._DM016302 != value))
+				{
+					if (this._DBDM0160.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDM016302Changing(value);
+					this.SendPropertyChanging();
+					this._DM016302 = value;
+					this.SendPropertyChanged("DM016302");
+					this.OnDM016302Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016303", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string DM016303
+		{
+			get
+			{
+				return this._DM016303;
+			}
+			set
+			{
+				if ((this._DM016303 != value))
+				{
+					this.OnDM016303Changing(value);
+					this.SendPropertyChanging();
+					this._DM016303 = value;
+					this.SendPropertyChanged("DM016303");
+					this.OnDM016303Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016304", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string DM016304
+		{
+			get
+			{
+				return this._DM016304;
+			}
+			set
+			{
+				if ((this._DM016304 != value))
+				{
+					this.OnDM016304Changing(value);
+					this.SendPropertyChanging();
+					this._DM016304 = value;
+					this.SendPropertyChanged("DM016304");
+					this.OnDM016304Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016305", DbType="NChar(1) NOT NULL")]
+		public char DM016305
+		{
+			get
+			{
+				return this._DM016305;
+			}
+			set
+			{
+				if ((this._DM016305 != value))
+				{
+					this.OnDM016305Changing(value);
+					this.SendPropertyChanging();
+					this._DM016305 = value;
+					this.SendPropertyChanged("DM016305");
+					this.OnDM016305Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016306", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid DM016306
+		{
+			get
+			{
+				return this._DM016306;
+			}
+			set
+			{
+				if ((this._DM016306 != value))
+				{
+					this.OnDM016306Changing(value);
+					this.SendPropertyChanging();
+					this._DM016306 = value;
+					this.SendPropertyChanged("DM016306");
+					this.OnDM016306Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016307", DbType="DateTime NOT NULL")]
+		public System.DateTime DM016307
+		{
+			get
+			{
+				return this._DM016307;
+			}
+			set
+			{
+				if ((this._DM016307 != value))
+				{
+					this.OnDM016307Changing(value);
+					this.SendPropertyChanging();
+					this._DM016307 = value;
+					this.SendPropertyChanged("DM016307");
+					this.OnDM016307Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016308", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid DM016308
+		{
+			get
+			{
+				return this._DM016308;
+			}
+			set
+			{
+				if ((this._DM016308 != value))
+				{
+					this.OnDM016308Changing(value);
+					this.SendPropertyChanging();
+					this._DM016308 = value;
+					this.SendPropertyChanged("DM016308");
+					this.OnDM016308Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016309", DbType="DateTime NOT NULL")]
+		public System.DateTime DM016309
+		{
+			get
+			{
+				return this._DM016309;
+			}
+			set
+			{
+				if ((this._DM016309 != value))
+				{
+					this.OnDM016309Changing(value);
+					this.SendPropertyChanging();
+					this._DM016309 = value;
+					this.SendPropertyChanged("DM016309");
+					this.OnDM016309Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
+		public bool IsDeleted
+		{
+			get
+			{
+				return this._IsDeleted;
+			}
+			set
+			{
+				if ((this._IsDeleted != value))
+				{
+					this.OnIsDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0160_DBDM0163", Storage="_DBDM0160", ThisKey="DM016302", OtherKey="DM016001", IsForeignKey=true)]
+		public DBDM0160 DBDM0160
+		{
+			get
+			{
+				return this._DBDM0160.Entity;
+			}
+			set
+			{
+				DBDM0160 previousValue = this._DBDM0160.Entity;
+				if (((previousValue != value) 
+							|| (this._DBDM0160.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._DBDM0160.Entity = null;
+						previousValue.DBDM0163s.Remove(this);
+					}
+					this._DBDM0160.Entity = value;
+					if ((value != null))
+					{
+						value.DBDM0163s.Add(this);
+						this._DM016302 = value.DM016001;
+					}
+					else
+					{
+						this._DM016302 = default(System.Guid);
+					}
+					this.SendPropertyChanged("DBDM0160");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DBDM0164")]
@@ -2011,7 +2093,7 @@ namespace QLNhiemvu_WebAPI.DAL
 		
 		private System.DateTime _DM016407;
 		
-		private bool _DM016408;
+		private bool _IsDeleted;
 		
 		private EntityRef<DBDM0160> _DBDM0160;
 		
@@ -2035,8 +2117,8 @@ namespace QLNhiemvu_WebAPI.DAL
     partial void OnDM016406Changed();
     partial void OnDM016407Changing(System.DateTime value);
     partial void OnDM016407Changed();
-    partial void OnDM016408Changing(bool value);
-    partial void OnDM016408Changed();
+    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanged();
     #endregion
 		
 		public DBDM0164()
@@ -2194,22 +2276,22 @@ namespace QLNhiemvu_WebAPI.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016408", DbType="Bit NOT NULL")]
-		public bool DM016408
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
+		public bool IsDeleted
 		{
 			get
 			{
-				return this._DM016408;
+				return this._IsDeleted;
 			}
 			set
 			{
-				if ((this._DM016408 != value))
+				if ((this._IsDeleted != value))
 				{
-					this.OnDM016408Changing(value);
+					this.OnIsDeletedChanging(value);
 					this.SendPropertyChanging();
-					this._DM016408 = value;
-					this.SendPropertyChanged("DM016408");
-					this.OnDM016408Changed();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
 				}
 			}
 		}
@@ -2303,318 +2385,6 @@ namespace QLNhiemvu_WebAPI.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DBDM0166")]
-	public partial class DBDM0166 : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _DM016601;
-		
-		private System.Guid _DM016602;
-		
-		private System.Guid _DM016603;
-		
-		private System.Guid _DM016604;
-		
-		private System.DateTime _DM016605;
-		
-		private System.Guid _DM016606;
-		
-		private System.DateTime _DM016607;
-		
-		private bool _DM016608;
-		
-		private EntityRef<DBDM0162> _DBDM0162;
-		
-		private EntityRef<DBDM0162> _DBDM01621;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnDM016601Changing(System.Guid value);
-    partial void OnDM016601Changed();
-    partial void OnDM016602Changing(System.Guid value);
-    partial void OnDM016602Changed();
-    partial void OnDM016603Changing(System.Guid value);
-    partial void OnDM016603Changed();
-    partial void OnDM016604Changing(System.Guid value);
-    partial void OnDM016604Changed();
-    partial void OnDM016605Changing(System.DateTime value);
-    partial void OnDM016605Changed();
-    partial void OnDM016606Changing(System.Guid value);
-    partial void OnDM016606Changed();
-    partial void OnDM016607Changing(System.DateTime value);
-    partial void OnDM016607Changed();
-    partial void OnDM016608Changing(bool value);
-    partial void OnDM016608Changed();
-    #endregion
-		
-		public DBDM0166()
-		{
-			this._DBDM0162 = default(EntityRef<DBDM0162>);
-			this._DBDM01621 = default(EntityRef<DBDM0162>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016601", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid DM016601
-		{
-			get
-			{
-				return this._DM016601;
-			}
-			set
-			{
-				if ((this._DM016601 != value))
-				{
-					this.OnDM016601Changing(value);
-					this.SendPropertyChanging();
-					this._DM016601 = value;
-					this.SendPropertyChanged("DM016601");
-					this.OnDM016601Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016602", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid DM016602
-		{
-			get
-			{
-				return this._DM016602;
-			}
-			set
-			{
-				if ((this._DM016602 != value))
-				{
-					if (this._DBDM0162.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDM016602Changing(value);
-					this.SendPropertyChanging();
-					this._DM016602 = value;
-					this.SendPropertyChanged("DM016602");
-					this.OnDM016602Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016603", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid DM016603
-		{
-			get
-			{
-				return this._DM016603;
-			}
-			set
-			{
-				if ((this._DM016603 != value))
-				{
-					if (this._DBDM01621.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDM016603Changing(value);
-					this.SendPropertyChanging();
-					this._DM016603 = value;
-					this.SendPropertyChanged("DM016603");
-					this.OnDM016603Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016604", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid DM016604
-		{
-			get
-			{
-				return this._DM016604;
-			}
-			set
-			{
-				if ((this._DM016604 != value))
-				{
-					this.OnDM016604Changing(value);
-					this.SendPropertyChanging();
-					this._DM016604 = value;
-					this.SendPropertyChanged("DM016604");
-					this.OnDM016604Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016605", DbType="DateTime NOT NULL")]
-		public System.DateTime DM016605
-		{
-			get
-			{
-				return this._DM016605;
-			}
-			set
-			{
-				if ((this._DM016605 != value))
-				{
-					this.OnDM016605Changing(value);
-					this.SendPropertyChanging();
-					this._DM016605 = value;
-					this.SendPropertyChanged("DM016605");
-					this.OnDM016605Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016606", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid DM016606
-		{
-			get
-			{
-				return this._DM016606;
-			}
-			set
-			{
-				if ((this._DM016606 != value))
-				{
-					this.OnDM016606Changing(value);
-					this.SendPropertyChanging();
-					this._DM016606 = value;
-					this.SendPropertyChanged("DM016606");
-					this.OnDM016606Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016607", DbType="DateTime NOT NULL")]
-		public System.DateTime DM016607
-		{
-			get
-			{
-				return this._DM016607;
-			}
-			set
-			{
-				if ((this._DM016607 != value))
-				{
-					this.OnDM016607Changing(value);
-					this.SendPropertyChanging();
-					this._DM016607 = value;
-					this.SendPropertyChanged("DM016607");
-					this.OnDM016607Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016608", DbType="Bit NOT NULL")]
-		public bool DM016608
-		{
-			get
-			{
-				return this._DM016608;
-			}
-			set
-			{
-				if ((this._DM016608 != value))
-				{
-					this.OnDM016608Changing(value);
-					this.SendPropertyChanging();
-					this._DM016608 = value;
-					this.SendPropertyChanged("DM016608");
-					this.OnDM016608Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0162_DBDM0166", Storage="_DBDM0162", ThisKey="DM016602", OtherKey="DM016201", IsForeignKey=true)]
-		public DBDM0162 DBDM0162
-		{
-			get
-			{
-				return this._DBDM0162.Entity;
-			}
-			set
-			{
-				DBDM0162 previousValue = this._DBDM0162.Entity;
-				if (((previousValue != value) 
-							|| (this._DBDM0162.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DBDM0162.Entity = null;
-						previousValue.DBDM0166s.Remove(this);
-					}
-					this._DBDM0162.Entity = value;
-					if ((value != null))
-					{
-						value.DBDM0166s.Add(this);
-						this._DM016602 = value.DM016201;
-					}
-					else
-					{
-						this._DM016602 = default(System.Guid);
-					}
-					this.SendPropertyChanged("DBDM0162");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0162_DBDM01661", Storage="_DBDM01621", ThisKey="DM016603", OtherKey="DM016201", IsForeignKey=true)]
-		public DBDM0162 DBDM01621
-		{
-			get
-			{
-				return this._DBDM01621.Entity;
-			}
-			set
-			{
-				DBDM0162 previousValue = this._DBDM01621.Entity;
-				if (((previousValue != value) 
-							|| (this._DBDM01621.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._DBDM01621.Entity = null;
-						previousValue.DBDM0166s1.Remove(this);
-					}
-					this._DBDM01621.Entity = value;
-					if ((value != null))
-					{
-						value.DBDM0166s1.Add(this);
-						this._DM016603 = value.DM016201;
-					}
-					else
-					{
-						this._DM016603 = default(System.Guid);
-					}
-					this.SendPropertyChanged("DBDM01621");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DBDM0165")]
 	public partial class DBDM0165 : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2635,7 +2405,7 @@ namespace QLNhiemvu_WebAPI.DAL
 		
 		private System.DateTime _DM016507;
 		
-		private bool _DM016508;
+		private bool _IsDeleted;
 		
 		private EntityRef<DBDM0161> _DBDM0161;
 		
@@ -2659,8 +2429,8 @@ namespace QLNhiemvu_WebAPI.DAL
     partial void OnDM016506Changed();
     partial void OnDM016507Changing(System.DateTime value);
     partial void OnDM016507Changed();
-    partial void OnDM016508Changing(bool value);
-    partial void OnDM016508Changed();
+    partial void OnIsDeletedChanging(bool value);
+    partial void OnIsDeletedChanged();
     #endregion
 		
 		public DBDM0165()
@@ -2818,22 +2588,22 @@ namespace QLNhiemvu_WebAPI.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016508", DbType="Bit NOT NULL")]
-		public bool DM016508
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit NOT NULL")]
+		public bool IsDeleted
 		{
 			get
 			{
-				return this._DM016508;
+				return this._IsDeleted;
 			}
 			set
 			{
-				if ((this._DM016508 != value))
+				if ((this._IsDeleted != value))
 				{
-					this.OnDM016508Changing(value);
+					this.OnIsDeletedChanging(value);
 					this.SendPropertyChanging();
-					this._DM016508 = value;
-					this.SendPropertyChanged("DM016508");
-					this.OnDM016508Changed();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
 				}
 			}
 		}
@@ -2902,6 +2672,188 @@ namespace QLNhiemvu_WebAPI.DAL
 						this._DM016503 = default(System.Guid);
 					}
 					this.SendPropertyChanged("DBDM0162");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Authentications")]
+	public partial class Authentication : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Username;
+		
+		private string _Password;
+		
+		private string _Description;
+		
+		private string _ListIPs;
+		
+		private bool _IsActive;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnListIPsChanging(string value);
+    partial void OnListIPsChanged();
+    partial void OnIsActiveChanging(bool value);
+    partial void OnIsActiveChanged();
+    #endregion
+		
+		public Authentication()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ListIPs", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string ListIPs
+		{
+			get
+			{
+				return this._ListIPs;
+			}
+			set
+			{
+				if ((this._ListIPs != value))
+				{
+					this.OnListIPsChanging(value);
+					this.SendPropertyChanging();
+					this._ListIPs = value;
+					this.SendPropertyChanged("ListIPs");
+					this.OnListIPsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
+		public bool IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this.OnIsActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsActive = value;
+					this.SendPropertyChanged("IsActive");
+					this.OnIsActiveChanged();
 				}
 			}
 		}
