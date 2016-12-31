@@ -520,11 +520,11 @@ namespace QLNhiemvu_WebAPI.DAL
 
         #region DM_LoaiThutucNhiemvu_Truongdulieu
 
-        public List<DM_LoaiThutucNhiemvu_Truongdulieu> LoaiThutucNhiemvu_Truongdulieu_GetList()
+        public List<DM_LoaiThutucNhiemvu_Truongdulieu> LoaiThutucNhiemvu_Truongdulieu_GetList(bool onlyCanChildren)
         {
             try
             {
-                var list = db.DBDM0162s.Where(o => !o.IsDeleted);
+                var list = db.DBDM0162s.Where(o => !o.IsDeleted && (onlyCanChildren ? o.DM016207.Trim() != "9" : true));
                 if (list.Count() == 0) return null;
 
                 List<DM_LoaiThutucNhiemvu_Truongdulieu> result = new List<DM_LoaiThutucNhiemvu_Truongdulieu>();

@@ -53,6 +53,9 @@ namespace QLNhiemvu_WebAPI.Functions
                     case "getlist":
                         GetList();
                         break;
+                    case "getlistcanchildren":
+                        GetListCanChildren();
+                        break;                        
                     case "create":
                         Create();
                         break;
@@ -69,6 +72,21 @@ namespace QLNhiemvu_WebAPI.Functions
                         GetListTableColumns();
                         break;
                 }
+            }
+        }
+
+        private void GetListCanChildren()
+        {
+            using (DataTools dataTools = new DataTools())
+            {
+                List<DM_LoaiThutucNhiemvu_Truongdulieu> result = dataTools.LoaiThutucNhiemvu_Truongdulieu_GetList(true);
+
+                DoResponse(new APIResponseData()
+                {
+                    ErrorCode = 0,
+                    Message = "Success",
+                    Data = result == null ? null : JsonConvert.SerializeObject(result)
+                });
             }
         }
 
@@ -169,7 +187,7 @@ namespace QLNhiemvu_WebAPI.Functions
         {
             using (DataTools dataTools = new DataTools())
             {
-                List<DM_LoaiThutucNhiemvu_Truongdulieu> result = dataTools.LoaiThutucNhiemvu_Truongdulieu_GetList();
+                List<DM_LoaiThutucNhiemvu_Truongdulieu> result = dataTools.LoaiThutucNhiemvu_Truongdulieu_GetList(false);
 
                 DoResponse(new APIResponseData()
                 {
