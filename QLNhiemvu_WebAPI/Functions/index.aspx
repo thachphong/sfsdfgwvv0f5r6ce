@@ -9,7 +9,13 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            check connection ok!
+            <div>
+                API site status: Running!;
+            </div>
+            <div>
+                DB connection:
+                <a id="pDBConnection" runat="server"></a>
+            </div>
         </div>
     </form>
 </body>

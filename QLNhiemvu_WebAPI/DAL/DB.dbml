@@ -58,7 +58,7 @@
       <Column Name="DM016207" Type="System.String" DbType="NChar(2) NOT NULL" CanBeNull="false" />
       <Column Name="DM016208" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="DM016209" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
-      <Column Name="DM016210" Type="System.String" DbType="NText" CanBeNull="true" />
+      <Column Name="DM016210" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="DM016213" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="DM016214" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="DM016215" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />

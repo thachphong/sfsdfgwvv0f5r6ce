@@ -24,6 +24,7 @@ namespace QLNhiemvu_DBEntities
         public string Cachnhap { get; set; }
         public string NguoiTao { get; set; }
         public string NguoiCapnhat { get; set; }
+        public List<Guid> FieldSelecteds { get; set; }
     }
 
     public class DM_LoaiThutucNhiemvu_Noidung_Cachnhap

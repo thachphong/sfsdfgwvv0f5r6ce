@@ -1453,7 +1453,7 @@ namespace QLNhiemvu_WebAPI.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016210", DbType="NText")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016210", DbType="NVarChar(MAX)")]
 		public string DM016210
 		{
 			get

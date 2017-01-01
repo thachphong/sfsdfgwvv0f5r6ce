@@ -60,6 +60,7 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Functions\DBUtilities.aspx" />
     <Content Include="Functions\LoaiThutuc.aspx" />
     <Content Include="Functions\LoaiThutuc_Huongdan.aspx" />
     <Content Include="Functions\LoaiThutuc_Noidung.aspx" />
@@ -93,6 +94,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DB.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Functions\DBUtilities.aspx.cs">
+      <DependentUpon>DBUtilities.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Functions\DBUtilities.aspx.designer.cs">
+      <DependentUpon>DBUtilities.aspx</DependentUpon>
     </Compile>
     <Compile Include="Functions\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>

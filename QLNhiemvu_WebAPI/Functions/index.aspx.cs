@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLNhiemvu_WebAPI.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,10 @@ namespace QLNhiemvu_WebAPI.Functions
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            using (DataTools dataTools = new DataTools())
+            {
+                pDBConnection.InnerHtml = dataTools.DBMaster_CheckConnection() ? "OK" : "LOST";
+            }
         }
     }
 }

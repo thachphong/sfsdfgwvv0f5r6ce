@@ -24,6 +24,7 @@ namespace QLNhiemvu_WebAPI
             routeCollection.MapPageRoute("LoaiThutucNhiemvu_Huongdan", "loaithutuc_huongdan", "~/Functions/LoaiThutuc_Huongdan.aspx");
             routeCollection.MapPageRoute("LoaiThutucNhiemvu_Noidung", "loaithutuc_noidung", "~/Functions/LoaiThutuc_Noidung.aspx");
             routeCollection.MapPageRoute("LoaiThutucNhiemvu_Truongdulieu", "loaithutuc_truongdulieu", "~/Functions/LoaiThutuc_Truongdulieu.aspx");
+            routeCollection.MapPageRoute("DBUtilities", "dbutilities", "~/Functions/DBUtilities.aspx");
         }
 
         protected void Session_Start(object sender, EventArgs e)

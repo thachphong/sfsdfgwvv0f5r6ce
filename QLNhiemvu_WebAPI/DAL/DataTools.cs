@@ -1,4 +1,5 @@
-﻿using QLNhiemVu;
+﻿using Newtonsoft.Json;
+using QLNhiemVu;
 using QLNhiemvu_DBEntities;
 using System;
 using System.Collections.Generic;
@@ -60,8 +61,8 @@ namespace QLNhiemvu_WebAPI.DAL
                 foreach (DBDM0160 obj in list.OrderByDescending(o => o.DM016007))
                 {
                     List<Guid> fieldSelecteds = new List<Guid>();
-                    var fields = obj.DBDM0164s;
-                    if (fields.Count > 0)
+                    var fields = obj.DBDM0164s.Where(o => !o.IsDeleted);
+                    if (fields.Count() > 0)
                     {
                         foreach (DBDM0164 field in fields)
                             fieldSelecteds.Add(field.DM016403);
@@ -150,6 +151,12 @@ namespace QLNhiemvu_WebAPI.DAL
                 DBDM0160 obj = db.DBDM0160s.FirstOrDefault(o => o.DM016001 == objThutuc.DM016001);
                 if (obj == null) return 2;
 
+                foreach (DBDM0164 child in obj.DBDM0164s)
+                {
+                    child.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+
                 foreach (Guid id in objThutuc.FieldSelecteds)
                 {
                     DBDM0164 check = obj.DBDM0164s.FirstOrDefault(o => o.DM016403 == id);
@@ -218,6 +225,11 @@ namespace QLNhiemvu_WebAPI.DAL
                 updateObj.DM016009 = obj.DM016009;
                 updateObj.DM016010 = obj.DM016010;
                 db.SubmitChanges();
+
+                if (obj.DM016010 == '1')
+                {
+                    LoaiThutucNhiemvu_UpdateFieldSelecteds(obj);
+                }
 
                 return 0;
             }
@@ -395,8 +407,13 @@ namespace QLNhiemvu_WebAPI.DAL
                 List<DM_LoaiThutucNhiemvu_Noidung> result = new List<DM_LoaiThutucNhiemvu_Noidung>();
                 foreach (DBDM0161 obj in list.OrderByDescending(o => o.DM016107))
                 {
-                    //DBDM0160 loaiThutuc = db.DBDM0160s.FirstOrDefault(o => o.DM016001 == obj.DM016102);
-                    //if (loaiThutuc == null) continue;
+                    List<Guid> fieldSelecteds = new List<Guid>();
+                    var fields = obj.DBDM0165s.Where(o => !o.IsDeleted);
+                    if (fields.Count() > 0)
+                    {
+                        foreach (DBDM0165 field in fields)
+                            fieldSelecteds.Add(field.DM016504);
+                    }
 
                     result.Add(new DM_LoaiThutucNhiemvu_Noidung()
                     {
@@ -415,7 +432,8 @@ namespace QLNhiemvu_WebAPI.DAL
                             obj.DM016105 == '1' ? "Nhập đoạn văn" :
                             "Nhập các trường dữ liệu",
                         NguoiCapnhat = "Nguyễn văn XXX",
-                        NguoiTao = "Nguyễn văn XXX"
+                        NguoiTao = "Nguyễn văn XXX",
+                        FieldSelecteds = fieldSelecteds.Count == 0 ? null : fieldSelecteds
                     });
                 }
 
@@ -455,6 +473,10 @@ namespace QLNhiemvu_WebAPI.DAL
                     IsDeleted = false,
                 });
                 db.SubmitChanges();
+
+                if (obj.DM016105 == '2')
+                    LoaiThutucNhiemvu_Noidung_UpdateFieldSelecteds(obj);
+
                 return 0;
             }
             catch (Exception ex)
@@ -488,6 +510,9 @@ namespace QLNhiemvu_WebAPI.DAL
                 updateObj.DM016110 = obj.DM016110;
                 db.SubmitChanges();
 
+                if (obj.DM016105 == '2')
+                    LoaiThutucNhiemvu_Noidung_UpdateFieldSelecteds(obj);
+
                 return 0;
             }
             catch (Exception ex)
@@ -506,6 +531,65 @@ namespace QLNhiemvu_WebAPI.DAL
 
                 obj.IsDeleted = true;
                 db.SubmitChanges();
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return int.MinValue;
+            }
+        }
+
+        public int LoaiThutucNhiemvu_Noidung_UpdateFieldSelecteds(DM_LoaiThutucNhiemvu_Noidung objNoidung)
+        {
+            try
+            {
+                if (objNoidung.FieldSelecteds == null || objNoidung.FieldSelecteds.Count == 0) return 1;
+                DBDM0161 obj = db.DBDM0161s.FirstOrDefault(o => o.DM016101 == objNoidung.DM016101);
+                if (obj == null) return 2;
+
+                foreach (DBDM0165 child in obj.DBDM0165s)
+                {
+                    child.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+
+                foreach (Guid id in objNoidung.FieldSelecteds)
+                {
+                    DBDM0165 check = obj.DBDM0165s.FirstOrDefault(o => o.DM016503 == id);
+                    if (check == null) //Chưa có
+                    {
+                        db.DBDM0165s.InsertOnSubmit(new DBDM0165()
+                        {
+                            DM016501 = Guid.NewGuid(),
+                            DM016502 = objNoidung.DM016101,
+                            DM016503 = id,
+                            DM016504 = objNoidung.DM016108,
+                            DM016505 = DateTime.Now,
+                            DM016506 = objNoidung.DM016108,
+                            DM016507 = DateTime.Now,
+                            IsDeleted = false,
+                        });
+                        db.SubmitChanges();
+                    }
+                    else //Đã có
+                    {
+                        if (check.IsDeleted) //Đã xóa
+                        {
+                            check.IsDeleted = false;
+                            check.DM016506 = objNoidung.DM016108;
+                            check.DM016507 = DateTime.Now;
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            check.DM016506 = objNoidung.DM016108;
+                            check.DM016507 = DateTime.Now;
+                            db.SubmitChanges();
+                        }
+                    }
+                }
 
                 return 0;
             }
@@ -610,12 +694,78 @@ namespace QLNhiemvu_WebAPI.DAL
                     IsDeleted = false,
                 });
                 db.SubmitChanges();
+
+                if (obj.DM016207.Trim() == "9")
+                    LoaiThutucNhiemvu_Truongdulieu_UpdateChildren(obj);
+
                 return 0;
             }
             catch (Exception ex)
             {
                 Log.write(ex);
                 return int.MinValue;
+            }
+        }
+
+        public bool LoaiThutucNhiemvu_Truongdulieu_UpdateChildren(DM_LoaiThutucNhiemvu_Truongdulieu obj)
+        {
+            try
+            {
+                List<Guid> data = JsonConvert.DeserializeObject<List<Guid>>(obj.DM016210);
+                if (data == null || data.Count == 0)
+                    return false;
+
+                DBDM0162 parent = db.DBDM0162s.FirstOrDefault(o => o.DM016201 == obj.DM016201);
+                if (parent == null) return false;
+
+                foreach (DBDM0166 child in parent.DBDM0166s)
+                {
+                    child.IsDeleted = true;
+                    db.SubmitChanges();
+                }
+
+                foreach (Guid id in data)
+                {
+                    DBDM0166 check = db.DBDM0166s.FirstOrDefault(o => o.DM016602 == obj.DM016201 && o.DM016603 == id);
+                    if (check == null) //Chưa có
+                    {
+                        db.DBDM0166s.InsertOnSubmit(new DBDM0166()
+                        {
+                            DM016601 = Guid.NewGuid(),
+                            DM016602 = obj.DM016201,
+                            DM016603 = id,
+                            DM016604 = obj.DM016219,
+                            DM016605 = DateTime.Now,
+                            DM016606 = obj.DM016219,
+                            DM016607 = DateTime.Now,
+                            IsDeleted = false
+                        });
+                        db.SubmitChanges();
+                    }
+                    else //Đã có
+                    {
+                        if (check.IsDeleted) //Đã xóa
+                        {
+                            check.IsDeleted = false;
+                            check.DM016606 = obj.DM016219;
+                            check.DM016607 = DateTime.Now;
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            check.DM016606 = obj.DM016219;
+                            check.DM016607 = DateTime.Now;
+                            db.SubmitChanges();
+                        }
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return false;
             }
         }
 
@@ -647,6 +797,9 @@ namespace QLNhiemvu_WebAPI.DAL
                 updateObj.DM016219 = obj.DM016219;
                 updateObj.DM016220 = obj.DM016220;
                 db.SubmitChanges();
+
+                if (obj.DM016207.Trim() == "9")
+                    LoaiThutucNhiemvu_Truongdulieu_UpdateChildren(obj);
 
                 return 0;
             }
@@ -726,6 +879,22 @@ namespace QLNhiemvu_WebAPI.DAL
             {
                 Log.write(ex);
                 return null;
+            }
+        }
+
+        public bool DBMaster_CheckConnection()
+        {
+            try
+            {
+                db.Connection.Open();
+                db.Connection.Close();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return false;
             }
         }
 
