@@ -65,6 +65,7 @@
     <Content Include="Functions\LoaiThutuc_Huongdan.aspx" />
     <Content Include="Functions\LoaiThutuc_Noidung.aspx" />
     <Content Include="Functions\LoaiThutuc_Truongdulieu.aspx" />
+    <Content Include="Functions\ResourceManager.aspx" />
     <Content Include="packages.config" />
     <Content Include="DAL\DB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -137,6 +138,13 @@
     <Compile Include="Functions\LoaiThutuc_Truongdulieu.aspx.designer.cs">
       <DependentUpon>LoaiThutuc_Truongdulieu.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Functions\ResourceManager.aspx.cs">
+      <DependentUpon>ResourceManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Functions\ResourceManager.aspx.designer.cs">
+      <DependentUpon>ResourceManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -156,6 +164,9 @@
     <None Include="DAL\DB.dbml.layout">
       <DependentUpon>DB.dbml</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\ThutucNhiemvu\Huongdan\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -287,6 +287,7 @@ namespace QLNhiemvu_WebAPI.DAL
                         DM016307 = obj.DM016307,
                         DM016308 = obj.DM016308,
                         DM016309 = obj.DM016309,
+                        DM016310 = obj.DM016310,
                         IsChecked = false,
                         LoaiThutucNhiemvu = obj.DBDM0160.DM016004,
                         LoaiHuongdan =
@@ -330,6 +331,7 @@ namespace QLNhiemvu_WebAPI.DAL
                     DM016307 = obj.DM016307,
                     DM016308 = obj.DM016308,
                     DM016309 = obj.DM016309,
+                    DM016310 = obj.DM016310,
                     IsDeleted = false
                 });
                 db.SubmitChanges();
@@ -363,6 +365,7 @@ namespace QLNhiemvu_WebAPI.DAL
                 updateObj.DM016305 = obj.DM016305;
                 updateObj.DM016308 = obj.DM016308;
                 updateObj.DM016309 = obj.DM016309;
+                updateObj.DM016310 = obj.DM016310;
                 db.SubmitChanges();
 
                 return 0;
@@ -412,7 +415,7 @@ namespace QLNhiemvu_WebAPI.DAL
                     if (fields.Count() > 0)
                     {
                         foreach (DBDM0165 field in fields)
-                            fieldSelecteds.Add(field.DM016504);
+                            fieldSelecteds.Add(field.DM016503);
                     }
 
                     result.Add(new DM_LoaiThutucNhiemvu_Noidung()

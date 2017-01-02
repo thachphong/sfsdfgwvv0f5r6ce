@@ -11,6 +11,16 @@ namespace QLNhiemvu_WebAPI
 {
     public class BasePage : Page
     {
+        public class Defines
+        {
+            public class ResourcePaths
+            {
+                public class LoaiThutucNhiemvu
+                {
+                    public static string Huongdan = "~/Resources/ThutucNhiemvu/Huongdan";
+                }
+            }
+        }
         public int ValidateRequest()
         {
             try

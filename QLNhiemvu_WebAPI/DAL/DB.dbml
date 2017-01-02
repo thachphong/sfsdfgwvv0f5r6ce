@@ -85,6 +85,7 @@
       <Column Name="DM016308" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="DM016309" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DM016310" Type="System.String" DbType="NVarChar(500)" CanBeNull="false" />
       <Association Name="DBDM0160_DBDM0163" Member="DBDM0160" ThisKey="DM016302" OtherKey="DM016001" Type="DBDM0160" IsForeignKey="true" />
     </Type>
   </Table>

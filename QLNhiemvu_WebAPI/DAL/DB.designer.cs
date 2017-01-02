@@ -1780,6 +1780,8 @@ namespace QLNhiemvu_WebAPI.DAL
 		
 		private bool _IsDeleted;
 		
+		private string _DM016310;
+		
 		private EntityRef<DBDM0160> _DBDM0160;
 		
     #region Extensibility Method Definitions
@@ -1806,6 +1808,8 @@ namespace QLNhiemvu_WebAPI.DAL
     partial void OnDM016309Changed();
     partial void OnIsDeletedChanging(bool value);
     partial void OnIsDeletedChanged();
+    partial void OnDM016310Changing(string value);
+    partial void OnDM016310Changed();
     #endregion
 		
 		public DBDM0163()
@@ -2014,6 +2018,26 @@ namespace QLNhiemvu_WebAPI.DAL
 					this._IsDeleted = value;
 					this.SendPropertyChanged("IsDeleted");
 					this.OnIsDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016310", DbType="NVarChar(500)", CanBeNull=false)]
+		public string DM016310
+		{
+			get
+			{
+				return this._DM016310;
+			}
+			set
+			{
+				if ((this._DM016310 != value))
+				{
+					this.OnDM016310Changing(value);
+					this.SendPropertyChanging();
+					this._DM016310 = value;
+					this.SendPropertyChanged("DM016310");
+					this.OnDM016310Changed();
 				}
 			}
 		}
