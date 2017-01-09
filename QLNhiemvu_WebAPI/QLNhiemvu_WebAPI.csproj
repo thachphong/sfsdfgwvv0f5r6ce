@@ -66,6 +66,7 @@
     <Content Include="Functions\LoaiThutuc_Noidung.aspx" />
     <Content Include="Functions\LoaiThutuc_Truongdulieu.aspx" />
     <Content Include="Functions\ResourceManager.aspx" />
+    <Content Include="Functions\Trinhduyet_ThuchienNhiemvu.aspx" />
     <Content Include="packages.config" />
     <Content Include="DAL\DB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -144,6 +145,13 @@
     </Compile>
     <Compile Include="Functions\ResourceManager.aspx.designer.cs">
       <DependentUpon>ResourceManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Functions\Trinhduyet_ThuchienNhiemvu.aspx.cs">
+      <DependentUpon>Trinhduyet_ThuchienNhiemvu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Functions\Trinhduyet_ThuchienNhiemvu.aspx.designer.cs">
+      <DependentUpon>Trinhduyet_ThuchienNhiemvu.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

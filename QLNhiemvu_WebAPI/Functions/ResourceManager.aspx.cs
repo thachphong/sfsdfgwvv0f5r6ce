@@ -40,7 +40,44 @@ namespace QLNhiemvu_WebAPI.Functions
                 case "loaithutucnhiemvu_huongdan":
                     LoaithutucNhiemvu_Huongdan();
                     break;
+                case "td_thuchiennhiemvu_tepdinhkem":
+                    Trinhduyet_Thuchiennhiemvu_Tepdinhkem();
+                    break;
             }
+        }
+
+        private void Trinhduyet_Thuchiennhiemvu_Tepdinhkem()
+        {
+            string fn = Request.QueryString["fn"];
+            if (string.IsNullOrEmpty(fn))
+                fn = DateTime.Now.Ticks.ToString();
+
+            if (Request.Files.Count == 0)
+            {
+                DoResponse(new APIResponseData()
+                {
+                    ErrorCode = 1,
+                    Message = "Missing request data!",
+                    Data = null
+                });
+            }
+
+            HttpPostedFile file = Request.Files[0];
+            string ext = file.FileName.Substring(file.FileName.LastIndexOf('.'));
+
+            string folderPath = ResolveUrl(Defines.ResourcePaths.TrinhduyetThuchiennhiemvu.Tepdinhkem);
+            if (!Directory.Exists(MapPath(folderPath)))
+                Directory.CreateDirectory(MapPath(folderPath));
+
+            string filePath = folderPath + "/" + fn + ext;
+            file.SaveAs(MapPath(filePath));
+
+            DoResponse(new APIResponseData()
+            {
+                ErrorCode = 0,
+                Message = "Upload success!",
+                Data = filePath.Replace("~", "")
+            });
         }
 
         private void LoaithutucNhiemvu_Huongdan()

@@ -19,6 +19,7 @@ namespace QLNhiemvu_DBEntities
         public string DM016213 { get; set; }
         public int DM016214 { get; set; }
         public char DM016215 { get; set; }
+        public Guid DM016216 { get; set; }
         public Guid DM016217 { get; set; }
         public DateTime DM016218 { get; set; }
         public Guid DM016219 { get; set; }
@@ -29,6 +30,9 @@ namespace QLNhiemvu_DBEntities
         public string Cachnhap { get; set; }
         public string NguoiTao { get; set; }
         public string NguoiCapnhat { get; set; }
+        public int Level { get; set; }
+        public string Maso { get; set; }
+        public string Tentruong { get; set; }
     }
 
     public class DM_LoaiThutucNhiemvu_Truongdulieu_Kieutruong

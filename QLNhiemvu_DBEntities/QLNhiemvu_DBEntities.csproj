@@ -42,6 +42,7 @@
     <Compile Include="APIEntities.cs" />
     <Compile Include="DM_Donvi.cs" />
     <Compile Include="DM_Huongdan.cs" />
+    <Compile Include="TD_ThuchienNhiemvu.cs" />
     <Compile Include="DM_LoaiThutucNhiemvu_Truongdulieu.cs" />
     <Compile Include="DM_LoaiThutucNhiemvu_Noidung.cs" />
     <Compile Include="DM_LoaiThutucNhiemvu.cs" />

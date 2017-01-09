@@ -24,6 +24,9 @@ namespace QLNhiemvu_WebAPI
             routeCollection.MapPageRoute("LoaiThutucNhiemvu_Huongdan", "loaithutuc_huongdan", "~/Functions/LoaiThutuc_Huongdan.aspx");
             routeCollection.MapPageRoute("LoaiThutucNhiemvu_Noidung", "loaithutuc_noidung", "~/Functions/LoaiThutuc_Noidung.aspx");
             routeCollection.MapPageRoute("LoaiThutucNhiemvu_Truongdulieu", "loaithutuc_truongdulieu", "~/Functions/LoaiThutuc_Truongdulieu.aspx");
+
+            routeCollection.MapPageRoute("Trinhduyet_ThuchienNhiemvu", "trinhduyet_thuchiennhiemvu", "~/Functions/Trinhduyet_ThuchienNhiemvu.aspx");
+            
             routeCollection.MapPageRoute("DBUtilities", "dbutilities", "~/Functions/DBUtilities.aspx");
             routeCollection.MapPageRoute("ResourceManager", "resources", "~/Functions/ResourceManager.aspx");
         }

@@ -12,7 +12,7 @@ using System.Web.UI.WebControls;
 
 namespace QLNhiemvu_WebAPI.Functions
 {
-    public partial class LoaiThutuc_Truongdulieu : BasePage
+    public partial class Trinhduyet_ThuchienNhiemvu : BasePage
     {
         private static APIRequestData currentData = null;
         protected void Page_Load(object sender, EventArgs e)
@@ -50,11 +50,20 @@ namespace QLNhiemvu_WebAPI.Functions
             {
                 switch (currentData.Action.ToLower())
                 {
+                    case "getlist_donviquanly":
+                        GetList_DonviQuanly();
+                        break;
+                    case "getlist_phanloainhiemvu":
+                        GetList_PhanloaiNhiemvu();
+                        break;
+                    case "getlist_truongdulieu":
+                        GetList_Truongdulieu();
+                        break;
+                    case "getlist_trangthaihoso":
+                        GetList_TrangthaiHoSo();
+                        break;
                     case "getlist":
                         GetList();
-                        break;
-                    case "getlistcanchildren":
-                        GetListCanChildren();
                         break;
                     case "create":
                         Create();
@@ -65,21 +74,64 @@ namespace QLNhiemvu_WebAPI.Functions
                     case "delete":
                         Delete();
                         break;
-                    case "getlisttables":
-                        GetListTables();
-                        break;
-                    case "getlisttablecolumns":
-                        GetListTableColumns();
-                        break;
                 }
             }
         }
 
-        private void GetListCanChildren()
+        private void GetList_TrangthaiHoSo()
         {
             using (DataTools dataTools = new DataTools())
             {
-                List<DM_LoaiThutucNhiemvu_Truongdulieu> result = dataTools.LoaiThutucNhiemvu_Truongdulieu_GetList(Guid.Empty, true);
+                List<TD_ThuchienNhiemvu_TrangthaiHoSo> result = dataTools.TD_ThuchienNhiemvu_Trangthai_GetList();
+
+                DoResponse(new APIResponseData()
+                {
+                    ErrorCode = 0,
+                    Message = "Success",
+                    Data = result == null ? null : JsonConvert.SerializeObject(result)
+                });
+            }
+        }
+
+        private void GetList_Truongdulieu()
+        {
+            List<Guid> ids = JsonConvert.DeserializeObject<List<Guid>>(currentData.Data.ToString());
+            Guid noidungId = ids[0];
+            Guid tdNhiemvuId = ids[1];
+
+            using (DataTools dataTools = new DataTools())
+            {
+                List<TD_ThuchienNhiemvu_Truongdulieu> result = dataTools.TD_ThuchienNhiemvu_Truongdulieu_GetList(noidungId, tdNhiemvuId);
+
+                DoResponse(new APIResponseData()
+                {
+                    ErrorCode = 0,
+                    Message = "Success",
+                    Data = result == null ? null : JsonConvert.SerializeObject(result)
+                });
+            }
+        }
+
+        private void GetList_DonviQuanly()
+        {
+            using (DataTools dataTools = new DataTools())
+            {
+                List<TD_ThuchienNhiemvu_DonviQuanly> result = dataTools.TD_ThuchienNhiemvu_DonviQuanly_GetList();
+
+                DoResponse(new APIResponseData()
+                {
+                    ErrorCode = 0,
+                    Message = "Success",
+                    Data = result == null ? null : JsonConvert.SerializeObject(result)
+                });
+            }
+        }
+
+        private void GetList_PhanloaiNhiemvu()
+        {
+            using (DataTools dataTools = new DataTools())
+            {
+                List<TD_ThuchienNhiemvu_PhanloaiNhiemvu> result = dataTools.TD_ThuchienNhiemvu_PhanloaiNhiemvu_GetList();
 
                 DoResponse(new APIResponseData()
                 {
@@ -98,7 +150,7 @@ namespace QLNhiemvu_WebAPI.Functions
             {
                 foreach (Guid id in list)
                 {
-                    int resultCode = dataTools.LoaiThutucNhiemvu_Truongdulieu_Delete(id);
+                    int resultCode = dataTools.TD_ThuchienNhiemvu_Delete(id);
                     if (resultCode == 0) total++;
                 }
 
@@ -113,7 +165,7 @@ namespace QLNhiemvu_WebAPI.Functions
                     DoResponse(new APIResponseData()
                     {
                         ErrorCode = 1,
-                        Message = "Còn tồn tại một số Trường dữ liệu chưa thực hiện được việc xóa!",
+                        Message = "Còn tồn tại một số Nhiệm vụ chưa thực hiện được việc xóa!",
                         Data = null
                     });
                 else
@@ -128,10 +180,10 @@ namespace QLNhiemvu_WebAPI.Functions
 
         private void Update()
         {
-            DM_LoaiThutucNhiemvu_Truongdulieu obj = JsonConvert.DeserializeObject<DM_LoaiThutucNhiemvu_Truongdulieu>(currentData.Data.ToString());
+            TD_ThuchienNhiemvu obj = JsonConvert.DeserializeObject<TD_ThuchienNhiemvu>(currentData.Data.ToString());
             using (DataTools dataTools = new DataTools())
             {
-                int resultCode = dataTools.LoaiThutucNhiemvu_Truongdulieu_Update(obj);
+                int resultCode = dataTools.TD_ThuchienNhiemvu_Update(obj);
                 if (resultCode == 0)
                     DoResponse(new APIResponseData()
                     {
@@ -145,9 +197,8 @@ namespace QLNhiemvu_WebAPI.Functions
                     {
                         ErrorCode = resultCode,
                         Message =
-                            resultCode == -1 ? "Không tìm được Trường dữ liệu này!" :
-                            resultCode == 1 ? "Trùng mã số!" :
-                            resultCode == 2 ? "Trùng tên!" :
+                            resultCode == -1 ? "Không tìm được Nhiệm vụ này!" :
+                            resultCode == 1 ? "Trùng Số văn bản!" :
                             "Unknown",
                         Data = null
                     });
@@ -157,10 +208,10 @@ namespace QLNhiemvu_WebAPI.Functions
 
         private void Create()
         {
-            DM_LoaiThutucNhiemvu_Truongdulieu obj = JsonConvert.DeserializeObject<DM_LoaiThutucNhiemvu_Truongdulieu>(currentData.Data.ToString());
+            TD_ThuchienNhiemvu obj = JsonConvert.DeserializeObject<TD_ThuchienNhiemvu>(currentData.Data.ToString());
             using (DataTools dataTools = new DataTools())
             {
-                int resultCode = dataTools.LoaiThutucNhiemvu_Truongdulieu_Create(obj);
+                int resultCode = dataTools.TD_ThuchienNhiemvu_Create(obj);
                 if (resultCode == 0)
                     DoResponse(new APIResponseData()
                     {
@@ -174,8 +225,7 @@ namespace QLNhiemvu_WebAPI.Functions
                     {
                         ErrorCode = resultCode,
                         Message =
-                            resultCode == 1 ? "Trùng mã số!" :
-                            resultCode == 2 ? "Trùng tên!" :
+                            resultCode == 1 ? "Trùng Mã văn bản!" :
                             "Unknow",
                         Data = null
                     });
@@ -185,41 +235,10 @@ namespace QLNhiemvu_WebAPI.Functions
 
         private void GetList()
         {
+            TD_ThuchienNhiemvu_Filter filter = JsonConvert.DeserializeObject<TD_ThuchienNhiemvu_Filter>(currentData.Data.ToString());
             using (DataTools dataTools = new DataTools())
             {
-                List<DM_LoaiThutucNhiemvu_Truongdulieu> result = dataTools.LoaiThutucNhiemvu_Truongdulieu_GetList(Guid.Empty, false);
-
-                DoResponse(new APIResponseData()
-                {
-                    ErrorCode = 0,
-                    Message = "Success",
-                    Data = result == null ? null : JsonConvert.SerializeObject(result)
-                });
-            }
-        }
-
-        private void GetListTables()
-        {
-            using (DataTools dataTools = new DataTools())
-            {
-                List<string> result = dataTools.DBMaster_GetTables("DB");
-
-                DoResponse(new APIResponseData()
-                {
-                    ErrorCode = 0,
-                    Message = "Success",
-                    Data = result == null ? null : JsonConvert.SerializeObject(result)
-                });
-            }
-        }
-
-        private void GetListTableColumns()
-        {
-            string tableName = currentData.Data.ToString();
-
-            using (DataTools dataTools = new DataTools())
-            {
-                List<string> result = dataTools.DBMaster_GetTableColumns(tableName, "DM");
+                List<TD_ThuchienNhiemvu> result = dataTools.TD_ThuchienNhiemvu_GetList(filter.Nam, filter.Sovanban, filter.TuNgay, filter.DenNgay, filter.MaPhanloai, filter.MaDanhmuc);
 
                 DoResponse(new APIResponseData()
                 {

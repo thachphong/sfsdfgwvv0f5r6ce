@@ -163,7 +163,13 @@ namespace QLNhiemvu_WebAPI.Functions
         {
             using (DataTools dataTools = new DataTools())
             {
-                List<DM_Huongdan> result = dataTools.LoaiThutucNhiemvu_Huongdan_GetList();
+                Guid id = Guid.Empty;
+                if (currentData.Data != null)
+                {
+                    id = Guid.Parse(currentData.Data.ToString());
+                }
+
+                List<DM_Huongdan> result = dataTools.LoaiThutucNhiemvu_Huongdan_GetList(id);
 
                 DoResponse(new APIResponseData()
                 {

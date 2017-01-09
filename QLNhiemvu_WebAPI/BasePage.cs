@@ -19,6 +19,10 @@ namespace QLNhiemvu_WebAPI
                 {
                     public static string Huongdan = "~/Resources/ThutucNhiemvu/Huongdan";
                 }
+                public class TrinhduyetThuchiennhiemvu
+                {
+                    public static string Tepdinhkem = "~/Resources/Trinhduyet/ThuchienNhiemvu/Tepdinhkem";
+                }
             }
         }
         public int ValidateRequest()
