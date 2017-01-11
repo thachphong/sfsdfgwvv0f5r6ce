@@ -46,9 +46,10 @@ namespace QLNhiemvu_DBEntities
 
     public class TD_ThuchienNhiemvu_Tepdinhkem
     {
+        public Guid Id { get; set; }
         public string Filename { get; set; }
         public string Path { get; set; }
-        public bool IsSelected { get; set; }
+        public bool IsChecked { get; set; }
     }
 
     public class TD_ThuchienNhiemvu_Truongdulieu
