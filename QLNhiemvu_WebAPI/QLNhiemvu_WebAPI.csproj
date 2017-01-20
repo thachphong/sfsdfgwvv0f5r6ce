@@ -46,6 +46,9 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="QLNhiemVu_Defines">
+      <HintPath>..\..\App\QLNhiemVu\bin\Debug\QLNhiemVu_Defines.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -62,11 +65,14 @@
   <ItemGroup>
     <Content Include="Functions\DBUtilities.aspx" />
     <Content Include="Functions\LoaiThutuc.aspx" />
+    <Content Include="Functions\LoaiThutucTrinhduyet.aspx" />
     <Content Include="Functions\LoaiThutuc_Huongdan.aspx" />
     <Content Include="Functions\LoaiThutuc_Noidung.aspx" />
     <Content Include="Functions\LoaiThutuc_Truongdulieu.aspx" />
+    <Content Include="Functions\Phancong.aspx" />
     <Content Include="Functions\ResourceManager.aspx" />
-    <Content Include="Functions\Trinhduyet_ThuchienNhiemvu.aspx" />
+    <Content Include="Functions\ThongBao.aspx" />
+    <Content Include="Functions\Trinhduyet.aspx" />
     <Content Include="packages.config" />
     <Content Include="DAL\DB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -118,6 +124,13 @@
     <Compile Include="Functions\LoaiThutuc.aspx.designer.cs">
       <DependentUpon>LoaiThutuc.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Functions\LoaiThutucTrinhduyet.aspx.cs">
+      <DependentUpon>LoaiThutucTrinhduyet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Functions\LoaiThutucTrinhduyet.aspx.designer.cs">
+      <DependentUpon>LoaiThutucTrinhduyet.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Functions\LoaiThutuc_Huongdan.aspx.cs">
       <DependentUpon>LoaiThutuc_Huongdan.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -139,6 +152,13 @@
     <Compile Include="Functions\LoaiThutuc_Truongdulieu.aspx.designer.cs">
       <DependentUpon>LoaiThutuc_Truongdulieu.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Functions\Phancong.aspx.cs">
+      <DependentUpon>Phancong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Functions\Phancong.aspx.designer.cs">
+      <DependentUpon>Phancong.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Functions\ResourceManager.aspx.cs">
       <DependentUpon>ResourceManager.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -146,12 +166,19 @@
     <Compile Include="Functions\ResourceManager.aspx.designer.cs">
       <DependentUpon>ResourceManager.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Functions\Trinhduyet_ThuchienNhiemvu.aspx.cs">
-      <DependentUpon>Trinhduyet_ThuchienNhiemvu.aspx</DependentUpon>
+    <Compile Include="Functions\ThongBao.aspx.cs">
+      <DependentUpon>ThongBao.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Functions\Trinhduyet_ThuchienNhiemvu.aspx.designer.cs">
-      <DependentUpon>Trinhduyet_ThuchienNhiemvu.aspx</DependentUpon>
+    <Compile Include="Functions\ThongBao.aspx.designer.cs">
+      <DependentUpon>ThongBao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Functions\Trinhduyet.aspx.cs">
+      <DependentUpon>Trinhduyet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Functions\Trinhduyet.aspx.designer.cs">
+      <DependentUpon>Trinhduyet.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

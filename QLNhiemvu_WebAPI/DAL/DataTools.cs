@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using QLNhiemVu;
 using QLNhiemvu_DBEntities;
+using QLNhiemVu_Defines;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -55,6 +56,108 @@ namespace QLNhiemvu_WebAPI.DAL
 
         #region DM_LoaiThutucNhiemvu
 
+        private DM_LoaiThutucNhiemvu LoaiThutucNhiemvu_Entity(DBDM0160 obj)
+        {
+            try
+            {
+                if (obj == null) return null;
+
+                List<Guid> fieldSelecteds = new List<Guid>();
+                var fields = obj.DBDM0164s.Where(o => !o.IsDeleted);
+                if (fields.Count() > 0)
+                {
+                    foreach (DBDM0164 field in fields)
+                        fieldSelecteds.Add(field.DM016403);
+                }
+
+                var tempNoidung = obj.DBDM0161s.Where(o => !o.IsDeleted);
+                List<DM_LoaiThutucNhiemvu_Noidung> dsNoidung = new List<DM_LoaiThutucNhiemvu_Noidung>();
+                if (tempNoidung.Count() == 0)
+                    dsNoidung = null;
+                else
+                {
+                    foreach (DBDM0161 noidung in tempNoidung.OrderBy(o => o.DM016103))
+                    {
+                        dsNoidung.Add(LoaiThutucNhiemvu_Noidung_Entity(noidung));
+                    }
+                }
+
+                var tempHuongdan = obj.DBDM0163s.Where(o => !o.IsDeleted);
+                List<DM_Huongdan> dsHuongdan = new List<DM_Huongdan>();
+                if (tempHuongdan.Count() == 0)
+                    dsHuongdan = null;
+                else
+                {
+                    foreach (DBDM0163 huongdan in tempHuongdan.OrderBy(o => o.DM016303))
+                    {
+                        dsHuongdan.Add(LoaiThutucNhiemvu_Huongdan_Entity(huongdan));
+                    }
+                }
+
+                return new DM_LoaiThutucNhiemvu()
+                {
+                    DM016001 = obj.DM016001,
+                    DM016002 = obj.DM016002,
+                    DM016003 = obj.DM016003,
+                    DM016004 = obj.DM016004,
+                    DM016005 = obj.DM016005,
+                    DM016006 = obj.DM016006,
+                    DM016007 = obj.DM016007,
+                    DM016008 = obj.DM016008,
+                    DM016009 = obj.DM016009,
+                    DM016010 = obj.DM016010,
+                    DM016011 = obj.DM016011,
+                    DM016012 = obj.DM016012,
+                    IsChecked = false,
+                    DonviSudung = All.gs_ten_dv_quanly,
+                    LoaiCapphep = All.dm_loaithutuc_loaicapphep.FirstOrDefault(o => o.ID == obj.DM016005).Description,
+                    NguoiCapnhat = All.gs_user_name,
+                    NguoiTao = All.gs_user_name,
+                    FieldSelecteds = fieldSelecteds.Count == 0 ? null : fieldSelecteds,
+                    DsNoidung = dsNoidung,
+                    DsHuongdan = dsHuongdan,
+                    DsCothienthi = string.IsNullOrEmpty(obj.DM016012) ? null : JsonConvert.DeserializeObject<List<TD_ThuchienNhiemvu_Cothienthi>>(obj.DM016012)
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        public DM_LoaiThutucNhiemvu LoaiThutucNhiemvu_Get(string maso)
+        {
+            try
+            {
+                DBDM0160 obj = db.DBDM0160s.FirstOrDefault(o => o.DM016003 == maso);
+                if (obj == null) return null;
+
+                return LoaiThutucNhiemvu_Entity(obj);
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        public DM_LoaiThutucNhiemvu LoaiThutucNhiemvu_Get(Guid id)
+        {
+            try
+            {
+                DBDM0160 obj = db.DBDM0160s.FirstOrDefault(o => o.DM016001 == id);
+                if (obj == null) return null;
+
+                return LoaiThutucNhiemvu_Entity(obj);
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
         public List<DM_LoaiThutucNhiemvu> LoaiThutucNhiemvu_GetList()
         {
             try
@@ -65,36 +168,7 @@ namespace QLNhiemvu_WebAPI.DAL
                 List<DM_LoaiThutucNhiemvu> result = new List<DM_LoaiThutucNhiemvu>();
                 foreach (DBDM0160 obj in list.OrderByDescending(o => o.DM016007))
                 {
-                    List<Guid> fieldSelecteds = new List<Guid>();
-                    var fields = obj.DBDM0164s.Where(o => !o.IsDeleted);
-                    if (fields.Count() > 0)
-                    {
-                        foreach (DBDM0164 field in fields)
-                            fieldSelecteds.Add(field.DM016403);
-                    }
-
-                    result.Add(new DM_LoaiThutucNhiemvu()
-                    {
-                        DM016001 = obj.DM016001,
-                        DM016002 = obj.DM016002,
-                        DM016003 = obj.DM016003,
-                        DM016004 = obj.DM016004,
-                        DM016005 = obj.DM016005,
-                        DM016006 = obj.DM016006,
-                        DM016007 = obj.DM016007,
-                        DM016008 = obj.DM016008,
-                        DM016009 = obj.DM016009,
-                        DM016010 = obj.DM016010,
-                        IsChecked = false,
-                        DonviSudung = "Cơ quan X",
-                        LoaiCapphep =
-                            obj.DM016005 == '1' ? "Tất cả" :
-                            obj.DM016005 == '2' ? "Đơn vị sử dụng chương trình cụ thể" :
-                            "Đơn vị trong hệ thống đều dùng",
-                        NguoiCapnhat = "Nguyễn văn XXX",
-                        NguoiTao = "Nguyễn văn XXX",
-                        FieldSelecteds = fieldSelecteds.Count == 0 ? null : fieldSelecteds
-                    });
+                    result.Add(LoaiThutucNhiemvu_Entity(obj));
                 }
 
                 return result;
@@ -130,6 +204,8 @@ namespace QLNhiemvu_WebAPI.DAL
                     DM016008 = obj.DM016008,
                     DM016009 = obj.DM016009,
                     DM016010 = obj.DM016010,
+                    DM016011 = obj.DM016011,
+                    DM016012 = obj.DM016012,
                     IsDeleted = false,
                 });
                 db.SubmitChanges();
@@ -229,6 +305,8 @@ namespace QLNhiemvu_WebAPI.DAL
                 updateObj.DM016008 = obj.DM016008;
                 updateObj.DM016009 = obj.DM016009;
                 updateObj.DM016010 = obj.DM016010;
+                updateObj.DM016011 = obj.DM016011;
+                updateObj.DM016012 = obj.DM016012;
                 db.SubmitChanges();
 
                 if (obj.DM016010 == '1')
@@ -268,6 +346,54 @@ namespace QLNhiemvu_WebAPI.DAL
 
         #region DM_LoaiThutucNhiemvu_Huongdan
 
+        private DM_Huongdan LoaiThutucNhiemvu_Huongdan_Entity(DBDM0163 obj)
+        {
+            try
+            {
+                if (obj == null) return null;
+
+                return new DM_Huongdan()
+                {
+                    DM016301 = obj.DM016301,
+                    DM016302 = obj.DM016302,
+                    DM016303 = obj.DM016303,
+                    DM016304 = obj.DM016304,
+                    DM016305 = obj.DM016305,
+                    DM016306 = obj.DM016306,
+                    DM016307 = obj.DM016307,
+                    DM016308 = obj.DM016308,
+                    DM016309 = obj.DM016309,
+                    DM016310 = obj.DM016310,
+                    IsChecked = false,
+                    LoaiThutucNhiemvu = obj.DBDM0160.DM016004,
+                    LoaiHuongdan = All.dm_loaithutuc_loaihuongdan.FirstOrDefault(o => o.ID == obj.DM016305).Description,
+                    NguoiCapnhat = All.gs_user_name,
+                    NguoiTao = All.gs_user_name,
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        public DM_Huongdan LoaiThutucNhiemvu_Huongdan_Get(Guid id)
+        {
+            try
+            {
+                DBDM0163 obj = db.DBDM0163s.FirstOrDefault(o => o.DM016301 == id);
+                if (obj == null) return null;
+
+                return LoaiThutucNhiemvu_Huongdan_Entity(obj);
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
         public List<DM_Huongdan> LoaiThutucNhiemvu_Huongdan_GetList(Guid thutucId)
         {
             try
@@ -281,30 +407,7 @@ namespace QLNhiemvu_WebAPI.DAL
                 List<DM_Huongdan> result = new List<DM_Huongdan>();
                 foreach (DBDM0163 obj in list.OrderByDescending(o => o.DM016307))
                 {
-                    //DBDM0160 loaiThutuc = db.DBDM0160s.FirstOrDefault(o => o.DM016001 == obj.DM016302);
-                    //if (loaiThutuc == null) continue;
-
-                    result.Add(new DM_Huongdan()
-                    {
-                        DM016301 = obj.DM016301,
-                        DM016302 = obj.DM016302,
-                        DM016303 = obj.DM016303,
-                        DM016304 = obj.DM016304,
-                        DM016305 = obj.DM016305,
-                        DM016306 = obj.DM016306,
-                        DM016307 = obj.DM016307,
-                        DM016308 = obj.DM016308,
-                        DM016309 = obj.DM016309,
-                        DM016310 = obj.DM016310,
-                        IsChecked = false,
-                        LoaiThutucNhiemvu = obj.DBDM0160.DM016004,
-                        LoaiHuongdan =
-                            obj.DM016305 == '1' ? "Tệp văn bản" :
-                            obj.DM016305 == '2' ? "Tệp video" :
-                            "Tệp audio",
-                        NguoiCapnhat = "Nguyễn văn XXX",
-                        NguoiTao = "Nguyễn văn XXX"
-                    });
+                    result.Add(LoaiThutucNhiemvu_Huongdan_Entity(obj));
                 }
 
                 return result;
@@ -408,6 +511,64 @@ namespace QLNhiemvu_WebAPI.DAL
 
         #region DM_LoaiThutucNhiemvu_Noidung
 
+        private DM_LoaiThutucNhiemvu_Noidung LoaiThutucNhiemvu_Noidung_Entity(DBDM0161 obj)
+        {
+            try
+            {
+                if (obj == null) return null;
+
+                List<Guid> fieldSelecteds = new List<Guid>();
+                var fields = obj.DBDM0165s.Where(o => !o.IsDeleted);
+                if (fields.Count() > 0)
+                {
+                    foreach (DBDM0165 field in fields)
+                        fieldSelecteds.Add(field.DM016503);
+                }
+
+                return new DM_LoaiThutucNhiemvu_Noidung()
+                {
+                    DM016101 = obj.DM016101,
+                    DM016102 = obj.DM016102,
+                    DM016103 = obj.DM016103,
+                    DM016104 = obj.DM016104,
+                    DM016105 = obj.DM016105,
+                    DM016106 = obj.DM016106,
+                    DM016107 = obj.DM016107,
+                    DM016108 = obj.DM016108,
+                    DM016109 = obj.DM016109,
+                    DM016110 = obj.DM016110,
+                    IsChecked = false,
+                    LoaiThutucNhiemvu = obj.DBDM0160.DM016004,
+                    Cachnhap = All.dm_loaithutuc_noidung_cachnhap.FirstOrDefault(o => o.ID == obj.DM016105).Description,
+                    FieldSelecteds = fieldSelecteds.Count == 0 ? null : fieldSelecteds,
+                    NguoiCapnhat = All.gs_user_name,
+                    NguoiTao = All.gs_user_name,
+                    DsTruongdulieu = LoaiThutucNhiemvu_Truongdulieu_GetList_OneLevel(obj.DM016101, Guid.Empty)
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        public DM_LoaiThutucNhiemvu_Noidung LoaiThutucNhiemvu_Noidung_Get(Guid id)
+        {
+            try
+            {
+                DBDM0161 obj = db.DBDM0161s.FirstOrDefault(o => o.DM016101 == id);
+                if (obj == null) return null;
+
+                return LoaiThutucNhiemvu_Noidung_Entity(obj);
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
         public List<DM_LoaiThutucNhiemvu_Noidung> LoaiThutucNhiemvu_Noidung_GetList(Guid thutucID)
         {
             try
@@ -418,34 +579,7 @@ namespace QLNhiemvu_WebAPI.DAL
                 List<DM_LoaiThutucNhiemvu_Noidung> result = new List<DM_LoaiThutucNhiemvu_Noidung>();
                 foreach (DBDM0161 obj in list.OrderByDescending(o => o.DM016107))
                 {
-                    List<Guid> fieldSelecteds = new List<Guid>();
-                    var fields = obj.DBDM0165s.Where(o => !o.IsDeleted);
-                    if (fields.Count() > 0)
-                    {
-                        foreach (DBDM0165 field in fields)
-                            fieldSelecteds.Add(field.DM016503);
-                    }
-
-                    result.Add(new DM_LoaiThutucNhiemvu_Noidung()
-                    {
-                        DM016101 = obj.DM016101,
-                        DM016102 = obj.DM016102,
-                        DM016103 = obj.DM016103,
-                        DM016104 = obj.DM016104,
-                        DM016105 = obj.DM016105,
-                        DM016106 = obj.DM016106,
-                        DM016107 = obj.DM016107,
-                        DM016108 = obj.DM016108,
-                        DM016109 = obj.DM016109,
-                        IsChecked = false,
-                        LoaiThutucNhiemvu = obj.DBDM0160.DM016004,
-                        Cachnhap =
-                            obj.DM016105 == '1' ? "Nhập đoạn văn" :
-                            "Nhập các trường dữ liệu",
-                        NguoiCapnhat = "Nguyễn văn XXX",
-                        NguoiTao = "Nguyễn văn XXX",
-                        FieldSelecteds = fieldSelecteds.Count == 0 ? null : fieldSelecteds
-                    });
+                    result.Add(LoaiThutucNhiemvu_Noidung_Entity(obj));
                 }
 
                 return result;
@@ -615,6 +749,31 @@ namespace QLNhiemvu_WebAPI.DAL
 
         #region DM_LoaiThutucNhiemvu_Truongdulieu
 
+        public List<DM_LoaiThutucNhiemvu_Truongdulieu> LoaiThutucNhiemvu_Truongdulieu_GetList_OneLevel(Guid noidungId, Guid parentId)
+        {
+            try
+            {
+                DBDM0161 nd = db.DBDM0161s.FirstOrDefault(o => o.DM016101 == noidungId);
+                if (nd == null) return null;
+
+                List<DM_LoaiThutucNhiemvu_Truongdulieu> result = new List<DM_LoaiThutucNhiemvu_Truongdulieu>();
+                var list = nd.DBDM0165s.Where(o => !o.IsDeleted && !o.DBDM0162.IsDeleted && o.DBDM0162.DM016216 == parentId);
+                //db.DBDM0162s.Where(o => !o.IsDeleted && o.DM016216 == parentId);
+
+                foreach (DBDM0165 obj in list.OrderByDescending(o => o.DBDM0162.DM016214))
+                {
+                    result.Add(LoaiThutucNhiemvu_Truongdulieu_Entity(obj.DBDM0162));
+                }
+
+                return result.Count == 0 ? null : result;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
         private string GenerateChildPrefix(int level)
         {
             string prefix = string.Empty;
@@ -623,6 +782,64 @@ namespace QLNhiemvu_WebAPI.DAL
                 prefix += "--";
 
             return prefix;
+        }
+
+        private DM_LoaiThutucNhiemvu_Truongdulieu LoaiThutucNhiemvu_Truongdulieu_Entity(DBDM0162 obj, int level = 0)
+        {
+            try
+            {
+                if (obj == null) return null;
+
+                return new DM_LoaiThutucNhiemvu_Truongdulieu()
+                {
+                    DM016201 = obj.DM016201,
+                    DM016204 = obj.DM016204,
+                    DM016205 = obj.DM016205,
+                    DM016206 = obj.DM016206,
+                    DM016207 = obj.DM016207.Trim(),
+                    DM016208 = (int)obj.DM016208,
+                    DM016209 = obj.DM016209,
+                    DM016210 = obj.DM016210,
+                    DM016213 = obj.DM016213,
+                    DM016214 = obj.DM016214,
+                    DM016215 = obj.DM016215,
+                    DM016216 = obj.DM016216,
+                    DM016217 = obj.DM016217,
+                    DM016218 = obj.DM016218,
+                    DM016219 = obj.DM016219,
+                    DM016220 = obj.DM016220,
+                    IsChecked = false,
+                    Cachnhap = string.Empty,
+                    Kieutruong = All.dm_loaithutuc_truongdulieu_kieutruong.FirstOrDefault(o => o.ID.Trim() == obj.DM016207.Trim()).Description,
+                    NguoiCapnhat = All.gs_user_name,
+                    NguoiTao = All.gs_user_name,
+                    Level = level,
+                    Maso = GenerateChildPrefix(level) + " " + obj.DM016204,
+                    Tentruong = GenerateChildPrefix(level) + " " + obj.DM016206,
+                    DsTruongcon = obj.DBDM0165s.FirstOrDefault() == null ? null : LoaiThutucNhiemvu_Truongdulieu_GetList_OneLevel(obj.DBDM0165s.FirstOrDefault().DM016502, obj.DM016201)
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        public DM_LoaiThutucNhiemvu_Truongdulieu LoaiThutucNhiemvu_Truongdulieu_Get(Guid id)
+        {
+            try
+            {
+                DBDM0162 obj = db.DBDM0162s.FirstOrDefault(o => o.DM016201 == id);
+                if (obj == null) return null;
+
+                return LoaiThutucNhiemvu_Truongdulieu_Entity(obj);
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
         }
 
         public List<DM_LoaiThutucNhiemvu_Truongdulieu> LoaiThutucNhiemvu_Truongdulieu_GetList(Guid parentId, bool onlyCanChildren, int level = 1)
@@ -634,44 +851,7 @@ namespace QLNhiemvu_WebAPI.DAL
 
                 foreach (DBDM0162 obj in list.OrderByDescending(o => o.DM016214))
                 {
-                    result.Add(new DM_LoaiThutucNhiemvu_Truongdulieu()
-                    {
-                        DM016201 = obj.DM016201,
-                        DM016204 = obj.DM016204,
-                        DM016205 = obj.DM016205,
-                        DM016206 = obj.DM016206,
-                        DM016207 = obj.DM016207,
-                        DM016208 = (int)obj.DM016208,
-                        DM016209 = obj.DM016209,
-                        DM016210 = obj.DM016210,
-                        DM016213 = obj.DM016213,
-                        DM016214 = obj.DM016214,
-                        DM016215 = obj.DM016215,
-                        DM016216 = obj.DM016216,
-                        DM016217 = obj.DM016217,
-                        DM016218 = obj.DM016218,
-                        DM016219 = obj.DM016219,
-                        DM016220 = obj.DM016220,
-                        IsChecked = false,
-                        Cachnhap = string.Empty,
-                        Kieutruong =
-                            obj.DM016207.Trim() == "1" ? "Text" :
-                            obj.DM016207.Trim() == "2" ? "Number" :
-                            obj.DM016207.Trim() == "3" ? "Yes/No" :
-                            obj.DM016207.Trim() == "4" ? "Date" :
-                            obj.DM016207.Trim() == "5" ? "Datetime" :
-                            obj.DM016207.Trim() == "6" ? "Time" :
-                            obj.DM016207.Trim() == "7" ? "Memo" :
-                            obj.DM016207.Trim() == "8" ? "Lookup" :
-                            obj.DM016207.Trim() == "9" ? "Tab" :
-                            obj.DM016207.Trim() == "10" ? "Image" :
-                            "NONE",
-                        NguoiCapnhat = "Nguyễn văn XXX",
-                        NguoiTao = "Nguyễn văn XXX",
-                        Level = level,
-                        Maso = GenerateChildPrefix(level) + " " + obj.DM016204,
-                        Tentruong = GenerateChildPrefix(level) + " " + obj.DM016206
-                    });
+                    result.Add(LoaiThutucNhiemvu_Truongdulieu_Entity(obj, level));
 
                     List<DM_LoaiThutucNhiemvu_Truongdulieu> children = LoaiThutucNhiemvu_Truongdulieu_GetList(obj.DM016201, onlyCanChildren, level + 1);
                     if (children != null)
@@ -721,8 +901,21 @@ namespace QLNhiemvu_WebAPI.DAL
                 });
                 db.SubmitChanges();
 
-                //if (obj.DM016207.Trim() == "9")
-                //    LoaiThutucNhiemvu_Truongdulieu_UpdateChildren(obj);
+                if (obj.NoidungId != Guid.Empty)
+                {
+                    db.DBDM0165s.InsertOnSubmit(new DBDM0165()
+                    {
+                        DM016501 = Guid.NewGuid(),
+                        DM016502 = obj.NoidungId,
+                        DM016503 = obj.DM016201,
+                        DM016504 = obj.DM016217,
+                        DM016505 = DateTime.Now,
+                        DM016506 = obj.DM016219,
+                        DM016507 = DateTime.Now,
+                        IsDeleted = false,
+                    });
+                    db.SubmitChanges();
+                }
 
                 return 0;
             }
@@ -999,7 +1192,216 @@ namespace QLNhiemvu_WebAPI.DAL
 
         #endregion
 
+        #region Trinhduyet
+
+        public List<TD_DonviQuanly> TD_DonviQuanly_GetList()
+        {
+            try
+            {
+                var list = db.DBDM0301s;
+                if (list.Count() == 0) return null;
+
+                List<TD_DonviQuanly> result = new List<TD_DonviQuanly>();
+                foreach (DBDM0301 obj in list.OrderByDescending(o => o.DM030104))
+                {
+                    var listNK = obj.DBDM0304s.Count == 0 ? null : obj.DBDM0304s.OrderBy(t => t.DM030402).ToList();
+                    List<TD_Nguoiky> dsnk = null;
+                    if (listNK != null)
+                    {
+                        dsnk = new List<TD_Nguoiky>();
+
+                        foreach (DBDM0304 nk in listNK)
+                        {
+                            dsnk.Add(TD_Nguyoiky_Entity(nk));
+                        }
+                    }
+
+                    result.Add(new TD_DonviQuanly()
+                    {
+                        DM030101 = obj.DM030101,
+                        DM030105 = obj.DM030105,
+                        DSNguoiky = dsnk
+                    });
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        public List<TD_TrangthaiHoSo> TD_Trangthai_GetList()
+        {
+            try
+            {
+                var list = db.DBDM0124s;
+                if (list.Count() == 0) return null;
+
+                List<TD_TrangthaiHoSo> result = new List<TD_TrangthaiHoSo>();
+                foreach (DBDM0124 obj in list.OrderBy(o => o.DM012404))
+                {
+                    result.Add(new TD_TrangthaiHoSo()
+                    {
+                        DM012401 = obj.DM012401,
+                        DM012402 = obj.DM012402,
+                        DM012403 = obj.DM012403
+                    });
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        private TD_Nguoiky TD_Nguyoiky_Entity(DBDM0304 obj)
+        {
+            if (obj == null) return null;
+
+            DBDM0305 chucvu = obj.DBDM0305s.FirstOrDefault(t => t.DM030506 <= DateTime.Now && t.DM030507 >= DateTime.Now);
+            return new TD_Nguoiky()
+            {
+                DM030401 = obj.DM030401,
+                DM030403 = obj.DM030403,
+                Chucvu = chucvu == null ? string.Empty : chucvu.DBDM0122.DM012203,
+                MaDonvi = obj.DM030407
+            };
+        }
+
+        public List<TD_Nguoiky> TD_Nguoiky_GetList(Guid nguoisudung, char phamvi = '0', char thamquyen = '0')
+        {
+            try
+            {
+                var list = db.DBDM0304s.AsQueryable();
+                if (list.Count() == 0) return null;
+
+                if (phamvi != '0')
+                {
+                    DBDM0304 ngSudung = db.DBDM0304s.FirstOrDefault(o => o.DM030401 == nguoisudung);
+                    if (ngSudung != null)
+                    {
+                        if (phamvi == '1')
+                            list = list.Where(o =>
+                                o.DM030401 != nguoisudung &&
+                                o.DBDM0305s.Where(t =>
+                                    t.DM030506 <= DateTime.Now &&
+                                    t.DM030507 >= DateTime.Now).OrderByDescending(t => t.DM030507).FirstOrDefault().DM030511 ==
+                                        ngSudung.DBDM0305s.Where(t =>
+                                        t.DM030506 <= DateTime.Now &&
+                                        t.DM030507 >= DateTime.Now).OrderByDescending(t => t.DM030507).FirstOrDefault().DM030511);
+
+                        if (phamvi == '2')
+                            list = list.Where(o =>
+                                o.DM030401 != nguoisudung &&
+                                o.DBDM0305s.Where(t =>
+                                    t.DM030506 <= DateTime.Now &&
+                                    t.DM030507 >= DateTime.Now).OrderByDescending(t => t.DM030507).FirstOrDefault().DM030511 == '6' &&
+                                o.DM030407 == ngSudung.DM030407);
+                    }
+                }
+
+                if (thamquyen != 0)
+                {
+                    //list = list.Where(o => o.DM030404 == thamquyen.ToString());
+                }
+
+                List<TD_Nguoiky> result = new List<TD_Nguoiky>();
+                foreach (DBDM0304 obj in list.OrderByDescending(o => o.DM030402))
+                {
+                    result.Add(TD_Nguyoiky_Entity(obj));
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        #endregion
+
         #region TD_DanhmucNhiemvu
+
+        private TD_ThuchienNhiemvu TD_ThuchienNhiemvu_Entity(DBDM0167 obj)
+        {
+            try
+            {
+                if (obj == null) return null;
+
+                List<TD_Phancong> dsPhancong = new List<TD_Phancong>();
+                foreach (DBDM0170 pc in obj.DBDM0170s)
+                {
+                    dsPhancong.Add(TD_Phancong_Entity(pc));
+                }
+
+                return new TD_ThuchienNhiemvu()
+                {
+                    AttachedFiles = string.IsNullOrEmpty(obj.DM016714) ? null : JsonConvert.DeserializeObject<List<TD_ThuchienNhiemvu_Tepdinhkem>>(obj.DM016714),
+                    Coquannhan = obj.DBDM0304.DBDM0301.DM030105,
+                    Danhmuc = obj.DBDM0202.DM020204,
+                    DM016701 = obj.DM016701,
+                    DM016702 = obj.DM016702,
+                    DM016703 = obj.DM016703,
+                    DM016705 = obj.DM016705,
+                    DM016706 = obj.DM016706,
+                    DM016707 = obj.DM016707,
+                    DM016708 = obj.DM016708,
+                    DM016710 = obj.DM016710,
+                    DM016711 = obj.DM016711,
+                    DM016713 = obj.DM016713,
+                    DM016714 = obj.DM016714,
+                    DM016715 = obj.DM016715,
+                    DM016716 = obj.DM016716,
+                    DM016717 = obj.DM016717,
+                    DM016718 = obj.DM016718,
+                    DM016719 = obj.DM016719,
+                    DM016720 = obj.DM016720,
+                    DonviSudung = All.gs_ten_dv_quanly,
+                    Fields = TD_ThuchienNhiemvu_Truongdulieu_GetList(obj.DBDM0161.DM016101, obj.DM016701),
+                    IsChecked = false,
+                    Nguoicapnhat = All.gs_user_name,
+                    Nguoiky = obj.DBDM0304.DM030403,
+                    Nguoitao = All.gs_user_name,
+                    NoidungChitiet = obj.DBDM0161.DM016104,
+                    PhanloaiNhiemvu = obj.DBDM0202.DBDM0140.DM014003,
+                    ThutucNhiemvu = obj.DBDM0161.DBDM0160.DM016004,
+                    Trangthai = db.DBDM0124s.FirstOrDefault(t => t.DM012401 == obj.DM016720).DM012403,
+                    MaCoquannhan = obj.DBDM0304.DBDM0301.DM030101,
+                    MaPhanloaiNhiemvu = obj.DBDM0202.DBDM0140.DM014001,
+                    MaThutucNhiemvu = obj.DBDM0161.DBDM0160.DM016001,
+                    DsPhancong = dsPhancong.Count == 0 ? null : dsPhancong
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        public TD_ThuchienNhiemvu TD_ThuchienNhiemvu_Get(Guid id)
+        {
+            try
+            {
+                DBDM0167 obj = db.DBDM0167s.FirstOrDefault(o => o.DM016701 == id);
+                if (obj == null) return null;
+
+                return TD_ThuchienNhiemvu_Entity(obj);
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
 
         public List<TD_ThuchienNhiemvu> TD_ThuchienNhiemvu_GetList(int year, string sovanban, DateTime dateStart, DateTime dateEnd, Guid phanloaiId, Guid danhmucId)
         {
@@ -1017,42 +1419,7 @@ namespace QLNhiemvu_WebAPI.DAL
                 List<TD_ThuchienNhiemvu> result = new List<TD_ThuchienNhiemvu>();
                 foreach (DBDM0167 obj in list.OrderByDescending(o => o.DM016707).ThenByDescending(o => o.DM016719))
                 {
-                    result.Add(new TD_ThuchienNhiemvu()
-                    {
-                        AttachedFiles = string.IsNullOrEmpty(obj.DM016714) ? null : JsonConvert.DeserializeObject<List<TD_ThuchienNhiemvu_Tepdinhkem>>(obj.DM016714),
-                        Coquannhan = obj.DBDM0304.DBDM0301.DM030105,
-                        Danhmuc = obj.DBDM0202.DM020204,
-                        DM016701 = obj.DM016701,
-                        DM016702 = obj.DM016702,
-                        DM016703 = obj.DM016703,
-                        DM016705 = obj.DM016705,
-                        DM016706 = obj.DM016706,
-                        DM016707 = obj.DM016707,
-                        DM016708 = obj.DM016708,
-                        DM016710 = obj.DM016710,
-                        DM016711 = obj.DM016711,
-                        DM016713 = obj.DM016713,
-                        DM016714 = obj.DM016714,
-                        DM016715 = obj.DM016715,
-                        DM016716 = obj.DM016716,
-                        DM016717 = obj.DM016717,
-                        DM016718 = obj.DM016718,
-                        DM016719 = obj.DM016719,
-                        DM016720 = obj.DM016720,
-                        DonviSudung = "Cơ quan X",
-                        Fields = TD_ThuchienNhiemvu_Truongdulieu_GetList(obj.DBDM0161.DM016101, obj.DM016701),
-                        IsChecked = false,
-                        Nguoicapnhat = "Nguyễn văn XXX",
-                        Nguoiky = obj.DBDM0304.DM030403,
-                        Nguoitao = "Nguyễn văn XXX",
-                        NoidungChitiet = obj.DBDM0161.DM016104,
-                        PhanloaiNhiemvu = obj.DBDM0202.DBDM0140.DM014003,
-                        ThutucNhiemvu = obj.DBDM0161.DBDM0160.DM016004,
-                        Trangthai = db.DBDM0124s.FirstOrDefault(t => t.DM012401 == obj.DM016720).DM012403,
-                        MaCoquannhan = obj.DBDM0304.DBDM0301.DM030101,
-                        MaPhanloaiNhiemvu = obj.DBDM0202.DBDM0140.DM014001,
-                        MaThutucNhiemvu = obj.DBDM0161.DBDM0160.DM016001,
-                    });
+                    result.Add(TD_ThuchienNhiemvu_Entity(obj));
                 }
 
                 return result;
@@ -1064,22 +1431,24 @@ namespace QLNhiemvu_WebAPI.DAL
             }
         }
 
-        public List<TD_ThuchienNhiemvu_TrangthaiHoSo> TD_ThuchienNhiemvu_Trangthai_GetList()
+        public List<TD_ThuchienNhiemvu> TD_ThuchienNhiemvu_GetListFor_Phancong(int nam, char phamviphancong, Guid donviphancong, Guid trangthaivanban, char thamquyenphancong, Guid nguoinhanvb, Guid nguoiphancong)
         {
             try
             {
-                var list = db.DBDM0124s;
-                if (list.Count() == 0) return null;
+                var list = db.DBDM0167s.Where(o => !o.IsDeleted);
+                if (nam != 0) list = list.Where(o => o.DM016703 == nam);
+                //if (phamviphancong!='0') list = list.Where(o => o.DM016706.ToLower().IndexOf(sovanban.ToLower()) >= 0);
+                //if (thamquyenphancong!='0') list = list.Where(o => o.DM016706.ToLower().IndexOf(sovanban.ToLower()) >= 0);
+                if (donviphancong != Guid.Empty) list = list.Where(o => o.DBDM0304.DBDM0301.DM030101 == donviphancong);
+                if (trangthaivanban != Guid.Empty) list = list.Where(o => o.DM016720 == trangthaivanban);
+                if (nguoinhanvb != Guid.Empty) list = list.Where(o => o.DBDM0170s.Count(t => t.DM017005 == nguoinhanvb) > 0);
+                if (nguoiphancong != Guid.Empty) list = list.Where(o => o.DBDM0170s.Count(t => t.DM017009 == nguoiphancong) > 0);
 
-                List<TD_ThuchienNhiemvu_TrangthaiHoSo> result = new List<TD_ThuchienNhiemvu_TrangthaiHoSo>();
-                foreach (DBDM0124 obj in list.OrderBy(o => o.DM012404))
+
+                List<TD_ThuchienNhiemvu> result = new List<TD_ThuchienNhiemvu>();
+                foreach (DBDM0167 obj in list.OrderByDescending(o => o.DM016707).ThenByDescending(o => o.DM016719))
                 {
-                    result.Add(new TD_ThuchienNhiemvu_TrangthaiHoSo()
-                    {
-                        DM012401 = obj.DM012401,
-                        DM012402 = obj.DM012402,
-                        DM012403 = obj.DM012403
-                    });
+                    result.Add(TD_ThuchienNhiemvu_Entity(obj));
                 }
 
                 return result;
@@ -1148,52 +1517,6 @@ namespace QLNhiemvu_WebAPI.DAL
                 if (noidung == null) return null;
 
                 return TD_ThuchienNhiemvu_Truongdulieu_GetListByParentId(noidungId, Guid.Empty, tdNhiemvuId);
-            }
-            catch (Exception ex)
-            {
-                Log.write(ex);
-                return null;
-            }
-        }
-
-        public List<TD_ThuchienNhiemvu_DonviQuanly> TD_ThuchienNhiemvu_DonviQuanly_GetList()
-        {
-            try
-            {
-                var list = db.DBDM0301s;
-                if (list.Count() == 0) return null;
-
-                List<TD_ThuchienNhiemvu_DonviQuanly> result = new List<TD_ThuchienNhiemvu_DonviQuanly>();
-                foreach (DBDM0301 obj in list.OrderByDescending(o => o.DM030104))
-                {
-                    var listNK = obj.DBDM0304s.Count == 0 ? null : obj.DBDM0304s.OrderBy(t => t.DM030402).ToList();
-                    List<TD_ThuchienNhiemvu_Nguoiky> dsnk = null;
-                    if (listNK != null)
-                    {
-                        dsnk = new List<TD_ThuchienNhiemvu_Nguoiky>();
-
-                        foreach (DBDM0304 nk in listNK)
-                        {
-                            DBDM0305 chucvu = nk.DBDM0305s.FirstOrDefault(t => t.DM030506 <= DateTime.Now && t.DM030507 >= DateTime.Now);
-
-                            dsnk.Add(new TD_ThuchienNhiemvu_Nguoiky()
-                            {
-                                DM030401 = nk.DM030401,
-                                DM030403 = nk.DM030403,
-                                Chucvu = chucvu == null ? string.Empty : chucvu.DBDM0122.DM012203
-                            });
-                        }
-                    }
-
-                    result.Add(new TD_ThuchienNhiemvu_DonviQuanly()
-                    {
-                        DM030101 = obj.DM030101,
-                        DM030105 = obj.DM030105,
-                        DSNguoiky = dsnk
-                    });
-                }
-
-                return result;
             }
             catch (Exception ex)
             {
@@ -1404,6 +1727,203 @@ namespace QLNhiemvu_WebAPI.DAL
             }
         }
 
+        #endregion
+
+        #region TD_Phancong
+
+        private TD_Phancong TD_Phancong_Entity(DBDM0170 obj)
+        {
+            try
+            {
+                if (obj == null) return null;
+                DBDM0301 donvi = db.DBDM0301s.FirstOrDefault(o => o.DM030101 == obj.DM017004);
+                DBDM0304 nguoinhan = db.DBDM0304s.FirstOrDefault(o => o.DM030401 == obj.DM017005);
+
+                return new TD_Phancong()
+                {
+                    DM017001 = obj.DM017001,
+                    DM017002 = obj.DM017002,
+                    DM017003 = obj.DM017003,
+                    DM017004 = obj.DM017004,
+                    DM017005 = obj.DM017005,
+                    DM017006 = obj.DM017006,
+                    DM017007 = obj.DM017007,
+                    DM017008 = obj.DM017008,
+                    DM017009 = obj.DM017009,
+                    DM017010 = obj.DM017010,
+                    DM017011 = obj.DM017011,
+                    DM017012 = obj.DM017012,
+                    DonviNhanVB = donvi == null ? string.Empty : donvi.DM030105,
+                    IsChecked = false,
+                    Nguoicapnhat = All.gs_user_name,
+                    NguoinhanVB = nguoinhan == null ? string.Empty : nguoinhan.DM030403,
+                    Nguoitao = All.gs_user_name
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        public TD_Phancong TD_Phancong_Get(Guid id)
+        {
+            try
+            {
+                DBDM0170 obj = db.DBDM0170s.FirstOrDefault(o => o.DM017001 == id);
+                if (obj == null) return null;
+
+                return TD_Phancong_Entity(obj);
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        public int TD_Phancong_Create(TD_Phancong obj)
+        {
+            try
+            {
+                db.DBDM0170s.InsertOnSubmit(new DBDM0170()
+                {
+                    DM017001 = obj.DM017001,
+                    DM017002 = obj.DM017002,
+                    DM017003 = obj.DM017003,
+                    DM017005 = obj.DM017005,
+                    DM017006 = obj.DM017006,
+                    DM017007 = obj.DM017007,
+                    DM017008 = obj.DM017008,
+                    DM017010 = obj.DM017010,
+                    DM017011 = obj.DM017011,
+                    DM017012 = obj.DM017012,
+                    IsDeleted = false,
+                });
+                db.SubmitChanges();
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return int.MinValue;
+            }
+        }
+
+        public int TD_Phancong_Update(TD_Phancong obj)
+        {
+            try
+            {
+                DBDM0170 updateObj = db.DBDM0170s.FirstOrDefault(o => o.DM017001 == obj.DM017001);
+                if (updateObj == null) return -1;
+
+                updateObj.DM017003 = obj.DM017003;
+                updateObj.DM017004 = obj.DM017004;
+                updateObj.DM017005 = obj.DM017005;
+                updateObj.DM017006 = obj.DM017006;
+                updateObj.DM017007 = obj.DM017007;
+                updateObj.DM017008 = obj.DM017008;
+
+                updateObj.DM017011 = obj.DM017011;
+                updateObj.DM017012 = obj.DM017012;
+
+                db.SubmitChanges();
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return int.MinValue;
+            }
+        }
+
+        public int TD_Phancong_Delete(Guid id)
+        {
+            try
+            {
+                DBDM0170 obj = db.DBDM0170s.FirstOrDefault(o => o.DM017001 == id);
+                if (obj == null) return -1;
+
+                obj.IsDeleted = true;
+                db.SubmitChanges();
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return int.MinValue;
+            }
+        }
+
+        #endregion
+
+        #region LoaiThutucTrinhDuyet_GetList
+        public List<DM_LoaiThutucTrinhduyet> LoaiThutucTrinhDuyet_GetList()
+        {
+            try
+            {
+                var list = db.DBDM0142s.OrderByDescending(o => o.DM014203);
+                if (list.Count() == 0) return null;
+
+                List<DM_LoaiThutucTrinhduyet> result = new List<DM_LoaiThutucTrinhduyet>();
+                foreach (DBDM0142 obj in list)
+                {
+                    result.Add(new DM_LoaiThutucTrinhduyet()
+                    {
+                        DM014201 = obj.DM014201,
+                        DM014202 = obj.DM014202,
+                        DM014203 = obj.DM014203
+                    });
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
+
+        #endregion
+
+        #region DM_ThongBao_GetList
+        public List<DM_ThongBao> DM_ThongBao_GetList()
+        {
+            try
+            {
+                var list = db.dbSysMesses.OrderBy(o => o.SYS03);
+                if (list.Count() == 0) return null;
+
+                List<DM_ThongBao> result = new List<DM_ThongBao>();
+                foreach (dbSysMess obj in list)
+                {
+                    result.Add(new DM_ThongBao()
+                    {
+                        SYS01 = obj.SYS01,
+                        SYS02 = obj.SYS03,
+                        SYS03 = obj.SYS03,
+                        SYS04 = obj.SYS04,
+                        SYS05 = obj.SYS05,
+                        SYS06 = obj.SYS06,
+                        SYS07 = obj.SYS07,
+                        SYS08 = obj.SYS08,
+                        SYS09 = obj.SYS09
+                    });
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return null;
+            }
+        }
         #endregion
     }
 }

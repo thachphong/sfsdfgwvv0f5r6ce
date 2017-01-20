@@ -50,6 +50,9 @@ namespace QLNhiemvu_WebAPI.Functions
             {
                 switch (currentData.Action.ToLower())
                 {
+                    case "getlist_root":
+                        GetList_Root();
+                        break;
                     case "getlist":
                         GetList();
                         break;
@@ -137,7 +140,7 @@ namespace QLNhiemvu_WebAPI.Functions
                     {
                         ErrorCode = 0,
                         Message = "Success",
-                        Data = null
+                        Data = JsonConvert.SerializeObject(dataTools.LoaiThutucNhiemvu_Truongdulieu_Get(obj.DM016201))
                     });
                 else
                 {
@@ -166,7 +169,7 @@ namespace QLNhiemvu_WebAPI.Functions
                     {
                         ErrorCode = 0,
                         Message = "Success",
-                        Data = null
+                        Data = JsonConvert.SerializeObject(dataTools.LoaiThutucNhiemvu_Truongdulieu_Get(obj.DM016201))
                     });
                 else
                 {
@@ -180,6 +183,22 @@ namespace QLNhiemvu_WebAPI.Functions
                         Data = null
                     });
                 }
+            }
+        }
+
+        private void GetList_Root()
+        {
+            Guid noidungId = Guid.Parse(currentData.Data.ToString());
+            using (DataTools dataTools = new DataTools())
+            {
+                List<DM_LoaiThutucNhiemvu_Truongdulieu> result = dataTools.LoaiThutucNhiemvu_Truongdulieu_GetList_OneLevel(noidungId, Guid.Empty);
+
+                DoResponse(new APIResponseData()
+                {
+                    ErrorCode = 0,
+                    Message = "Success",
+                    Data = result == null ? null : JsonConvert.SerializeObject(result)
+                });
             }
         }
 

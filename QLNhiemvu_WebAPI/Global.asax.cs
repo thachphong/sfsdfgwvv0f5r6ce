@@ -25,7 +25,11 @@ namespace QLNhiemvu_WebAPI
             routeCollection.MapPageRoute("LoaiThutucNhiemvu_Noidung", "loaithutuc_noidung", "~/Functions/LoaiThutuc_Noidung.aspx");
             routeCollection.MapPageRoute("LoaiThutucNhiemvu_Truongdulieu", "loaithutuc_truongdulieu", "~/Functions/LoaiThutuc_Truongdulieu.aspx");
 
-            routeCollection.MapPageRoute("Trinhduyet_ThuchienNhiemvu", "trinhduyet_thuchiennhiemvu", "~/Functions/Trinhduyet_ThuchienNhiemvu.aspx");
+            routeCollection.MapPageRoute("Trinhduyet_ThuchienNhiemvu", "trinhduyet_thuchiennhiemvu", "~/Functions/Trinhduyet.aspx");
+            routeCollection.MapPageRoute("Trinhduyet_Phancong", "trinhduyet_phancong", "~/Functions/Phancong.aspx");
+
+            routeCollection.MapPageRoute("LoaiThutucTrinhduyet", "loaithutuctrinhduyet", "~/Functions/LoaiThutucTrinhduyet.aspx");
+            routeCollection.MapPageRoute("ThongBao", "thongbao", "~/Functions/ThongBao.aspx");
             
             routeCollection.MapPageRoute("DBUtilities", "dbutilities", "~/Functions/DBUtilities.aspx");
             routeCollection.MapPageRoute("ResourceManager", "resources", "~/Functions/ResourceManager.aspx");

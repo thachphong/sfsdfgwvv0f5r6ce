@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Trinhduyet_ThuchienNhiemvu.aspx.cs" Inherits="QLNhiemvu_WebAPI.Functions.Trinhduyet_ThuchienNhiemvu" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ThongBao.aspx.cs" Inherits="QLNhiemvu_WebAPI.Functions.ThongBao" %>
 
 <!DOCTYPE html>
 

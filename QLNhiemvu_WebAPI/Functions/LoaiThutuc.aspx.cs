@@ -51,6 +51,9 @@ namespace QLNhiemvu_WebAPI.Functions
             {
                 switch (currentData.Action.ToLower())
                 {
+                    case "get_bymaso":
+                        Get_ByMaso();
+                        break;
                     case "getlist":
                         GetList();
                         break;
@@ -114,7 +117,7 @@ namespace QLNhiemvu_WebAPI.Functions
                     {
                         ErrorCode = 0,
                         Message = "Success",
-                        Data = null
+                        Data = JsonConvert.SerializeObject(dataTools.LoaiThutucNhiemvu_Get(obj.DM016001))
                     });
                 else
                 {
@@ -143,7 +146,7 @@ namespace QLNhiemvu_WebAPI.Functions
                     {
                         ErrorCode = 0,
                         Message = "Success",
-                        Data = null
+                        Data = JsonConvert.SerializeObject(dataTools.LoaiThutucNhiemvu_Get(obj.DM016001))
                     });
                 else
                 {
@@ -171,6 +174,22 @@ namespace QLNhiemvu_WebAPI.Functions
                     ErrorCode = 0,
                     Message = "Success",
                     Data = result == null ? null : JsonConvert.SerializeObject(result)
+                });
+            }
+        }
+
+        private void Get_ByMaso()
+        {
+            string maso = currentData.Data.ToString();
+            using (DataTools dataTools = new DataTools())
+            {
+                DM_LoaiThutucNhiemvu obj = dataTools.LoaiThutucNhiemvu_Get(maso);
+
+                DoResponse(new APIResponseData()
+                {
+                    ErrorCode = 0,
+                    Message = "Success",
+                    Data = obj == null ? null : JsonConvert.SerializeObject(obj)
                 });
             }
         }

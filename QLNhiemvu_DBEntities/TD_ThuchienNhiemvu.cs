@@ -42,6 +42,7 @@ namespace QLNhiemvu_DBEntities
         public string Trangthai { get; set; }
         public List<TD_ThuchienNhiemvu_Tepdinhkem> AttachedFiles { get; set; }
         public List<TD_ThuchienNhiemvu_Truongdulieu> Fields { get; set; }
+        public List<TD_Phancong> DsPhancong { get; set; }
     }
 
     public class TD_ThuchienNhiemvu_Tepdinhkem
@@ -85,21 +86,22 @@ namespace QLNhiemvu_DBEntities
         public string DM020204 { get; set; }
     }
 
-    public class TD_ThuchienNhiemvu_DonviQuanly
+    public class TD_DonviQuanly
     {
         public Guid DM030101 { get; set; }
         public string DM030105 { get; set; }
-        public List<TD_ThuchienNhiemvu_Nguoiky> DSNguoiky { get; set; }
+        public List<TD_Nguoiky> DSNguoiky { get; set; }
     }
 
-    public class TD_ThuchienNhiemvu_Nguoiky
+    public class TD_Nguoiky
     {
         public Guid DM030401 { get; set; }
         public string DM030403 { get; set; }
         public string Chucvu { get; set; }
+        public Guid MaDonvi { get; set; }
     }
 
-    public class TD_ThuchienNhiemvu_TrangthaiHoSo
+    public class TD_TrangthaiHoSo
     {
         public Guid DM012401 { get; set; }
         public string DM012402 { get; set; }
@@ -114,5 +116,12 @@ namespace QLNhiemvu_DBEntities
         public DateTime DenNgay { get; set; }
         public Guid MaPhanloai { get; set; }
         public Guid MaDanhmuc { get; set; }
+    }
+
+    public class TD_ThuchienNhiemvu_Cothienthi
+    {
+        public bool IsChecked { get; set; }
+        public string ColumnName { get; set; }
+        public string DisplayName { get; set; }
     }
 }

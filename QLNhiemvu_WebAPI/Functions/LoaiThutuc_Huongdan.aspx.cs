@@ -113,7 +113,7 @@ namespace QLNhiemvu_WebAPI.Functions
                     {
                         ErrorCode = 0,
                         Message = "Success",
-                        Data = null
+                        Data = JsonConvert.SerializeObject(dataTools.LoaiThutucNhiemvu_Huongdan_Get(obj.DM016301))
                     });
                 else
                 {
@@ -142,7 +142,7 @@ namespace QLNhiemvu_WebAPI.Functions
                     {
                         ErrorCode = 0,
                         Message = "Success",
-                        Data = null
+                        Data = JsonConvert.SerializeObject(dataTools.LoaiThutucNhiemvu_Huongdan_Get(obj.DM016301))
                     });
                 else
                 {

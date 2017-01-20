@@ -18,6 +18,8 @@ namespace QLNhiemvu_DBEntities
         public Guid DM016008 { get; set; }
         public DateTime DM016009 { get; set; }
         public char DM016010 { get; set; }
+        public Guid DM016011 { get; set; }
+        public string DM016012 { get; set; }
 
         public bool IsChecked { get; set; }
         public string DonviSudung { get; set; }
@@ -25,6 +27,10 @@ namespace QLNhiemvu_DBEntities
         public string NguoiTao { get; set; }
         public string NguoiCapnhat { get; set; }
         public List<Guid> FieldSelecteds { get; set; }
+
+        public List<DM_LoaiThutucNhiemvu_Noidung> DsNoidung { get; set; }
+        public List<DM_Huongdan> DsHuongdan { get; set; }
+        public List<TD_ThuchienNhiemvu_Cothienthi> DsCothienthi { get; set; }
     }
 
     public class DM_LoaiThutucNhiemvu_LoaiCapphep

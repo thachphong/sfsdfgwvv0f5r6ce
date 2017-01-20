@@ -33,6 +33,9 @@ namespace QLNhiemvu_DBEntities
         public int Level { get; set; }
         public string Maso { get; set; }
         public string Tentruong { get; set; }
+
+        public List<DM_LoaiThutucNhiemvu_Truongdulieu> DsTruongcon { get; set; }
+        public Guid NoidungId { get; set; }
     }
 
     public class DM_LoaiThutucNhiemvu_Truongdulieu_Kieutruong
