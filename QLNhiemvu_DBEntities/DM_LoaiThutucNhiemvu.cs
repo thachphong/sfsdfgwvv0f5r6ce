@@ -38,4 +38,11 @@ namespace QLNhiemvu_DBEntities
         public char ID { get; set; }
         public string Description { get; set; }
     }
+
+    public class DM_LoaiThutucNhiemvu_Filter
+    {
+        public string Ten { get; set; }
+        public char Phamvisudung { get; set; }
+        public Guid Loai { get; set; }
+    }
 }

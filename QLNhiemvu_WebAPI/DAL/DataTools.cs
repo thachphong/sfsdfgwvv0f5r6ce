@@ -158,11 +158,23 @@ namespace QLNhiemvu_WebAPI.DAL
             }
         }
 
-        public List<DM_LoaiThutucNhiemvu> LoaiThutucNhiemvu_GetList()
+        public List<DM_LoaiThutucNhiemvu> LoaiThutucNhiemvu_GetList(DM_LoaiThutucNhiemvu_Filter filter = null)
         {
             try
             {
                 var list = db.DBDM0160s.Where(o => !o.IsDeleted);
+                if (filter != null)
+                {
+                    if (!string.IsNullOrEmpty(filter.Ten))
+                        list = list.Where(o => o.DM016004.IndexOf(filter.Ten) >= 0);
+
+                    if (filter.Phamvisudung != '0')
+                        list = list.Where(o => o.DM016005 == filter.Phamvisudung);
+
+                    if (filter.Loai != Guid.Empty)
+                        list = list.Where(o => o.DM016011 == filter.Loai);
+                }
+
                 if (list.Count() == 0) return null;
 
                 List<DM_LoaiThutucNhiemvu> result = new List<DM_LoaiThutucNhiemvu>();
@@ -816,7 +828,8 @@ namespace QLNhiemvu_WebAPI.DAL
                     Level = level,
                     Maso = GenerateChildPrefix(level) + " " + obj.DM016204,
                     Tentruong = GenerateChildPrefix(level) + " " + obj.DM016206,
-                    DsTruongcon = obj.DBDM0165s.FirstOrDefault() == null ? null : LoaiThutucNhiemvu_Truongdulieu_GetList_OneLevel(obj.DBDM0165s.FirstOrDefault().DM016502, obj.DM016201)
+                    DsTruongcon = obj.DBDM0165s.FirstOrDefault() == null ? null : LoaiThutucNhiemvu_Truongdulieu_GetList_OneLevel(obj.DBDM0165s.FirstOrDefault().DM016502, obj.DM016201),
+                    NoidungId = obj.DBDM0165s.FirstOrDefault().DM016502
                 };
             }
             catch (Exception ex)

@@ -165,9 +165,13 @@ namespace QLNhiemvu_WebAPI.Functions
 
         private void GetList()
         {
+            DM_LoaiThutucNhiemvu_Filter filter = null;
+            if (currentData.Data != null)
+                filter = JsonConvert.DeserializeObject<DM_LoaiThutucNhiemvu_Filter>(currentData.Data.ToString());
+
             using (DataTools dataTools = new DataTools())
             {
-                List<DM_LoaiThutucNhiemvu> result = dataTools.LoaiThutucNhiemvu_GetList();
+                List<DM_LoaiThutucNhiemvu> result = dataTools.LoaiThutucNhiemvu_GetList(filter);
 
                 DoResponse(new APIResponseData()
                 {

@@ -50,6 +50,9 @@ namespace QLNhiemvu_WebAPI.Functions
             {
                 switch (currentData.Action.ToLower())
                 {
+                    case "getlist_children":
+                        GetList_Children();
+                        break;
                     case "getlist_root":
                         GetList_Root();
                         break;
@@ -183,6 +186,34 @@ namespace QLNhiemvu_WebAPI.Functions
                         Data = null
                     });
                 }
+            }
+        }
+
+        private void GetList_Children()
+        {
+            Guid parentId = Guid.Parse(currentData.Data.ToString());
+            using (DataTools dataTools = new DataTools())
+            {
+                DM_LoaiThutucNhiemvu_Truongdulieu parent = dataTools.LoaiThutucNhiemvu_Truongdulieu_Get(parentId);
+                if (parent == null)
+                {
+                    DoResponse(new APIResponseData()
+                    {
+                        ErrorCode = 0,
+                        Message = "Success",
+                        Data = null
+                    });
+                    return;
+                }
+
+                List<DM_LoaiThutucNhiemvu_Truongdulieu> result = dataTools.LoaiThutucNhiemvu_Truongdulieu_GetList_OneLevel(parent.NoidungId, parentId);
+
+                DoResponse(new APIResponseData()
+                {
+                    ErrorCode = 0,
+                    Message = "Success",
+                    Data = result == null ? null : JsonConvert.SerializeObject(result)
+                });
             }
         }
 
