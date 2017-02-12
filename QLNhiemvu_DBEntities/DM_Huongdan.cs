@@ -18,6 +18,7 @@ namespace QLNhiemvu_DBEntities
         public Guid DM016308 { get; set; }
         public DateTime DM016309 { get; set; }
         public string DM016310 { get; set; }
+        public Guid DM016311 { get; set; }
 
         public bool IsChecked { get; set; }
         public string LoaiThutucNhiemvu { get; set; }

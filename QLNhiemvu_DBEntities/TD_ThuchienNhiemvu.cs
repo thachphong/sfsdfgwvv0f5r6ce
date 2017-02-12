@@ -43,6 +43,9 @@ namespace QLNhiemvu_DBEntities
         public List<TD_ThuchienNhiemvu_Tepdinhkem> AttachedFiles { get; set; }
         public List<TD_ThuchienNhiemvu_Truongdulieu> Fields { get; set; }
         public List<TD_Phancong> DsPhancong { get; set; }
+        public int SongayHoanthanh { get; set; }
+        public bool Quahan { get; set; }
+        public int LoaiNoidungchitiet { get; set; }
     }
 
     public class TD_ThuchienNhiemvu_Tepdinhkem

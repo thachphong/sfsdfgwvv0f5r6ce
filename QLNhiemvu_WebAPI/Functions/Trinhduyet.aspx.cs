@@ -68,6 +68,9 @@ namespace QLNhiemvu_WebAPI.Functions
                     case "getlist_for_phancong":
                         GetList_For_Phancong();
                         break;
+                    case "getlist_for_thamdinh":
+                        GetList_For_Thamdinh();
+                        break;
                     case "getlist":
                         GetList();
                         break;
@@ -81,6 +84,22 @@ namespace QLNhiemvu_WebAPI.Functions
                         Delete();
                         break;
                 }
+            }
+        }
+
+        private void GetList_For_Thamdinh()
+        {
+            TD_Thamdinh_Filter filter = JsonConvert.DeserializeObject<TD_Thamdinh_Filter>(currentData.Data.ToString());
+            using (DataTools dataTools = new DataTools())
+            {
+                List<TD_ThuchienNhiemvu> result = dataTools.TD_ThuchienNhiemvu_GetListFor_Thamdinh(filter);
+
+                DoResponse(new APIResponseData()
+                {
+                    ErrorCode = 0,
+                    Message = "Success",
+                    Data = result == null ? null : JsonConvert.SerializeObject(result)
+                });
             }
         }
 
