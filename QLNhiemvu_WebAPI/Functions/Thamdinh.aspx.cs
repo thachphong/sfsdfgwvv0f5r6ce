@@ -53,6 +53,9 @@ namespace QLNhiemvu_WebAPI.Functions
                     case "getlist_truongdulieu":
                         GetList_Truongdulieu();
                         break;
+                    case "get_duyetthamdinh":
+                        Get_DuyetThamdinh();
+                        break;
                     case "getlist_duyet":
                         GetList_Duyet();
                         break;
@@ -66,6 +69,21 @@ namespace QLNhiemvu_WebAPI.Functions
                         Delete_Duyet();
                         break;
                 }
+            }
+        }
+
+        private void Get_DuyetThamdinh()
+        {
+            TD_Thamdinh_Duyet_FilterOne filter = JsonConvert.DeserializeObject<TD_Thamdinh_Duyet_FilterOne>(currentData.Data.ToString());
+            using (DataTools dataTools = new DataTools())
+            {
+                TD_Thamdinh_Duyet obj = dataTools.TD_Thamdinh_Duyet_Get(filter);
+                DoResponse(new APIResponseData()
+                {
+                    ErrorCode = 0,
+                    Message = "Success",
+                    Data = JsonConvert.SerializeObject(obj)
+                });
             }
         }
 

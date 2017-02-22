@@ -94,6 +94,20 @@ namespace QLNhiemvu_DBEntities
         public Guid DM030101 { get; set; }
         public string DM030105 { get; set; }
         public List<TD_Nguoiky> DSNguoiky { get; set; }
+        public bool IsChecked { get; set; }
+        public bool IsLeader { get; set; }
+        public TD_DonviQuanly()
+        {
+            IsChecked = true;
+            IsLeader = false;
+        }
+    }
+
+    public class TD_Capbanhanh
+    {
+        public Guid DM010701 { get; set; }
+        public string DM010703 { get; set; }
+        public List<TD_Nguoiky> DSNguoibanhanh { get; set; }
     }
 
     public class TD_Nguoiky
@@ -119,6 +133,7 @@ namespace QLNhiemvu_DBEntities
         public DateTime DenNgay { get; set; }
         public Guid MaPhanloai { get; set; }
         public Guid MaDanhmuc { get; set; }
+        public Guid MaDMNhiemvu { get; set; }
     }
 
     public class TD_ThuchienNhiemvu_Cothienthi

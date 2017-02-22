@@ -44,8 +44,10 @@
     <Compile Include="DM_Huongdan.cs" />
     <Compile Include="DM_LoaiThutucTrinhduyet.cs" />
     <Compile Include="DM_ThongBao.cs" />
+    <Compile Include="TD_Pheduyet_Thamdinh.cs" />
     <Compile Include="TD_Thamdinh.cs" />
     <Compile Include="TD_Phancong.cs" />
+    <Compile Include="TD_Pheduyet.cs" />
     <Compile Include="TD_ThuchienNhiemvu.cs" />
     <Compile Include="DM_LoaiThutucNhiemvu_Truongdulieu.cs" />
     <Compile Include="DM_LoaiThutucNhiemvu_Noidung.cs" />

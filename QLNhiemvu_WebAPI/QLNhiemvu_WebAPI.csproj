@@ -73,6 +73,7 @@
     <Content Include="Functions\ResourceManager.aspx" />
     <Content Include="Functions\ThongBao.aspx" />
     <Content Include="Functions\Thamdinh.aspx" />
+    <Content Include="Functions\Pheduyet.aspx" />
     <Content Include="Functions\Trinhduyet.aspx" />
     <Content Include="packages.config" />
     <Content Include="DAL\DB.dbml">
@@ -180,6 +181,13 @@
     </Compile>
     <Compile Include="Functions\Thamdinh.aspx.designer.cs">
       <DependentUpon>Thamdinh.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Functions\Pheduyet.aspx.cs">
+      <DependentUpon>Pheduyet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Functions\Pheduyet.aspx.designer.cs">
+      <DependentUpon>Pheduyet.aspx</DependentUpon>
     </Compile>
     <Compile Include="Functions\Trinhduyet.aspx.cs">
       <DependentUpon>Trinhduyet.aspx</DependentUpon>

@@ -35,6 +35,7 @@ namespace QLNhiemvu_DBEntities
         public string NguoinhanVB { get; set; }
         public string Nguoitao { get; set; }
         public string Nguoicapnhat { get; set; }
+        public List<TD_DonviQuanly> DsDonvinhanVB { get; set; }
     }
 
     public class TD_Phancong_Phamvi

@@ -91,6 +91,16 @@ namespace QLNhiemvu_DBEntities
         public Guid MaDanhmuc { get; set; }
     }
 
+    public class TD_Thamdinh_Duyet_FilterOne
+    {
+        public Guid DonviId { get; set; }
+        public int Nam { get; set; }
+        public Guid MaDanhmuc { get; set; }
+        public Guid Nguoibanhanh { get; set; }
+        public Guid MaNoidung { get; set; }
+
+    }
+
     public class TD_Thamdinh_Duyet_Phongban
     {
         public Guid ID { get; set; }

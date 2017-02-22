@@ -28,6 +28,11 @@ namespace QLNhiemvu_WebAPI
                     public static string Tepdinhkem = "~/Resources/Trinhduyet/Thamdinh/Tepdinhkem";
                     public static string Tepdinhkem_Duyet = "~/Resources/Trinhduyet/Thamdinh/Duyet/Tepdinhkem";
                 }
+                public class TrinhduyetPheduyet
+                {
+                    public static string Tepdinhkem_VB = "~/Resources/Trinhduyet/Pheduyet/TuVBCosan";
+                    public static string Tepdinhkem_TD = "~/Resources/Trinhduyet/Pheduyet/TuDulieuThamdinh";
+                }
             }
         }
         public int ValidateRequest()
