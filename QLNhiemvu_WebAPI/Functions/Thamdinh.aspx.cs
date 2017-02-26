@@ -68,6 +68,12 @@ namespace QLNhiemvu_WebAPI.Functions
                     case "delete_duyet":
                         Delete_Duyet();
                         break;
+                    case "create_duyet_list":
+                        Create_Duyet_List();
+                        break;
+                    case "update_duyet_list":
+                        Update_Duyet_List();
+                        break;
                 }
             }
         }
@@ -211,6 +217,61 @@ namespace QLNhiemvu_WebAPI.Functions
                     Message = "Success",
                     Data = result == null ? null : JsonConvert.SerializeObject(result)
                 });
+            }
+        }
+
+        private void Update_Duyet_List()
+        {
+            List<TD_Thamdinh_Duyet> obj = JsonConvert.DeserializeObject<List<TD_Thamdinh_Duyet>>(currentData.Data.ToString());
+            using (DataTools dataTools = new DataTools())
+            {
+                int resultCode = dataTools.TD_Thamdinh_Duyet_Update(obj);
+                if (resultCode == 0)
+                    DoResponse(new APIResponseData()
+                    {
+                        ErrorCode = 0,
+                        Message = "Success",
+                        Data = null
+                    });
+                else
+                {
+                    DoResponse(new APIResponseData()
+                    {
+                        ErrorCode = resultCode,
+                        Message =
+                            resultCode == -1 ? "Không tìm được Nhiệm vụ này!" :
+                            resultCode == 1 ? "Trùng Số văn bản!" :
+                            "Unknown",
+                        Data = null
+                    });
+                }
+            }
+        }
+
+        private void Create_Duyet_List()
+        {
+            List<TD_Thamdinh_Duyet> obj = JsonConvert.DeserializeObject<List<TD_Thamdinh_Duyet>>(currentData.Data.ToString());
+            using (DataTools dataTools = new DataTools())
+            {
+                int resultCode = dataTools.TD_Thamdinh_Duyet_Create(obj);
+                if (resultCode == 0)
+                    DoResponse(new APIResponseData()
+                    {
+                        ErrorCode = 0,
+                        Message = "Success",
+                        Data = null
+                    });
+                else
+                {
+                    DoResponse(new APIResponseData()
+                    {
+                        ErrorCode = resultCode,
+                        Message =
+                            resultCode == 1 ? "Trùng Mã văn bản!" :
+                            "Unknow",
+                        Data = null
+                    });
+                }
             }
         }
     }

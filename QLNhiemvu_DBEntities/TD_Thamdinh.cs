@@ -29,6 +29,7 @@ namespace QLNhiemvu_DBEntities
         public string DM017119 { get; set; }
         public Guid DM017120 { get; set; }
         public string DM017121 { get; set; }
+        public Guid DM017122 { get; set; }
 
 
         public bool IsChecked { get; set; }
@@ -45,6 +46,7 @@ namespace QLNhiemvu_DBEntities
         public string Loai { get; set; }
         public string Nguoiky { get; set; }
         public List<TD_Thamdinh_Duyet_Truongdulieu> Fields { get; set; }
+        public List<TD_Thamdinh_Duyet> ListDiffBy_Noidung { get; set; }
     }
 
     public class TD_Thamdinh_Duyet_Truongdulieu

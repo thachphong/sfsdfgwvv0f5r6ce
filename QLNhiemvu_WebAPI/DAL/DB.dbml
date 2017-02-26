@@ -372,6 +372,7 @@
       <Column Name="DM017120" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="DM017121" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DM017122" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="DBDM0171_DBDM0172" Member="DBDM0172s" ThisKey="DM017101" OtherKey="DM017202" Type="DBDM0172" />
       <Association Name="DBDM0202_DBDM0171" Member="DBDM0202" ThisKey="DM017104" OtherKey="DM020201" Type="DBDM0202" IsForeignKey="true" />
       <Association Name="DBDM0160_DBDM0171" Member="DBDM0160" ThisKey="DM017120" OtherKey="DM016001" Type="DBDM0160" IsForeignKey="true" />

@@ -89,9 +89,70 @@ namespace QLNhiemvu_WebAPI.Functions
                     case "update":
                         Update();
                         break;
+                    case "create_list":
+                        CreateList();
+                        break;
+                    case "update_list":
+                        UpdateList();
+                        break;
                     case "delete":
                         Delete();
                         break;
+                }
+            }
+        }
+
+        private void UpdateList()
+        {
+            List<TD_ThuchienNhiemvu> list = JsonConvert.DeserializeObject<List<TD_ThuchienNhiemvu>>(currentData.Data.ToString());
+            using (DataTools dataTools = new DataTools())
+            {
+                int resultCode = dataTools.TD_ThuchienNhiemvu_Update(list);
+                if (resultCode == 0)
+                    DoResponse(new APIResponseData()
+                    {
+                        ErrorCode = 0,
+                        Message = "Success",
+                        Data = null
+                    });
+                else
+                {
+                    DoResponse(new APIResponseData()
+                    {
+                        ErrorCode = resultCode,
+                        Message =
+                            resultCode == -1 ? "Không tìm được Nhiệm vụ này!" :
+                            resultCode == 1 ? "Trùng Số văn bản!" :
+                            "Unknown",
+                        Data = null
+                    });
+                }
+            }
+        }
+
+        private void CreateList()
+        {
+            List<TD_ThuchienNhiemvu> list = JsonConvert.DeserializeObject<List<TD_ThuchienNhiemvu>>(currentData.Data.ToString());
+            using (DataTools dataTools = new DataTools())
+            {
+                int resultCode = dataTools.TD_ThuchienNhiemvu_Create(list);
+                if (resultCode == 0)
+                    DoResponse(new APIResponseData()
+                    {
+                        ErrorCode = 0,
+                        Message = "Success",
+                        Data = null,
+                    });
+                else
+                {
+                    DoResponse(new APIResponseData()
+                    {
+                        ErrorCode = resultCode,
+                        Message =
+                            resultCode == 1 ? "Trùng Mã văn bản!" :
+                            "Unknow",
+                        Data = null
+                    });
                 }
             }
         }

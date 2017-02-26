@@ -7947,6 +7947,8 @@ namespace QLNhiemvu_WebAPI.DAL
 		
 		private string _DM017121;
 		
+		private System.Guid _DM017122;
+		
 		private EntitySet<DBDM0172> _DBDM0172s;
 		
 		private EntityRef<DBDM0202> _DBDM0202;
@@ -8005,6 +8007,8 @@ namespace QLNhiemvu_WebAPI.DAL
     partial void OnIsDeletedChanged();
     partial void OnDM017121Changing(string value);
     partial void OnDM017121Changed();
+    partial void OnDM017122Changing(System.Guid value);
+    partial void OnDM017122Changed();
     #endregion
 		
 		public DBDM0171()
@@ -8469,6 +8473,26 @@ namespace QLNhiemvu_WebAPI.DAL
 					this._DM017121 = value;
 					this.SendPropertyChanged("DM017121");
 					this.OnDM017121Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM017122", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid DM017122
+		{
+			get
+			{
+				return this._DM017122;
+			}
+			set
+			{
+				if ((this._DM017122 != value))
+				{
+					this.OnDM017122Changing(value);
+					this.SendPropertyChanging();
+					this._DM017122 = value;
+					this.SendPropertyChanged("DM017122");
+					this.OnDM017122Changed();
 				}
 			}
 		}

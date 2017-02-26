@@ -1190,7 +1190,7 @@ namespace QLNhiemvu_WebAPI.DAL
                             " from " + condition.Table +
                             ((condition.Condition1 != null || condition.Condition2 != null) ?
                             (" where " +
-                                (condition.Condition2 == null ? string.Empty : (
+                                (condition.Condition1 == null ? string.Empty : (
                                     condition.Condition1.ColumnName + " " + ConvertToSQLStatement(condition, 1, dalTools))) +
                                 (condition.Condition2 == null ? string.Empty : (
                                     " " + condition.ConditionCombination + " " +
@@ -1393,7 +1393,7 @@ namespace QLNhiemvu_WebAPI.DAL
                                         t.DM030506 <= DateTime.Now &&
                                         t.DM030507 >= DateTime.Now).OrderByDescending(t => t.DM030507).FirstOrDefault().DM030511);
 
-                        if (phamvi == '2')
+                        if (phamvi == '3')
                             list = list.Where(o =>
                                 o.DM030401 != nguoisudung &&
                                 o.DBDM0305s.Where(t =>
@@ -1427,7 +1427,7 @@ namespace QLNhiemvu_WebAPI.DAL
 
         #region TD_ThuchienNhiemvu
 
-        private TD_ThuchienNhiemvu TD_ThuchienNhiemvu_Entity(DBDM0167 obj)
+        private TD_ThuchienNhiemvu TD_ThuchienNhiemvu_Entity(DBDM0167 obj, bool loadRelation = true)
         {
             try
             {
@@ -1444,6 +1444,17 @@ namespace QLNhiemvu_WebAPI.DAL
                 {
                     TD_Phancong lastPC = dsPhancong.OrderByDescending(o => o.DM017006).FirstOrDefault();
                     snht = (int)lastPC.DM017007.Subtract(lastPC.DM017006).TotalDays;
+                }
+
+                List<TD_ThuchienNhiemvu> listDiffBy_Noidung = null;
+                if (loadRelation)
+                {
+                    listDiffBy_Noidung = new List<TD_ThuchienNhiemvu>();
+                    var temp = db.DBDM0167s.Where(o => !o.IsDeleted && o.DM016713 == obj.DM016713);
+                    foreach (DBDM0167 diff in temp)
+                    {
+                        listDiffBy_Noidung.Add(TD_ThuchienNhiemvu_Entity(diff, false));
+                    }
                 }
 
                 return new TD_ThuchienNhiemvu()
@@ -1484,7 +1495,8 @@ namespace QLNhiemvu_WebAPI.DAL
                     DsPhancong = dsPhancong.Count == 0 ? null : dsPhancong,
                     SongayHoanthanh = snht,
                     Quahan = DateTime.Now > obj.DM016707,
-                    LoaiNoidungchitiet = int.Parse(obj.DBDM0161.DM016105.ToString())
+                    LoaiNoidungchitiet = int.Parse(obj.DBDM0161.DM016105.ToString()),
+                    ListDiffBy_Noidung = (listDiffBy_Noidung == null || listDiffBy_Noidung.Count == 0) ? null : listDiffBy_Noidung,
                 };
             }
             catch (Exception ex)
@@ -1896,6 +1908,42 @@ namespace QLNhiemvu_WebAPI.DAL
             }
         }
 
+        public int TD_ThuchienNhiemvu_Create(List<TD_ThuchienNhiemvu> list)
+        {
+            try
+            {
+                if (list == null || list.Count == 0) return int.MinValue;
+
+                foreach (TD_ThuchienNhiemvu obj in list)
+                    TD_ThuchienNhiemvu_Create(obj);
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return int.MinValue;
+            }
+        }
+
+        public int TD_ThuchienNhiemvu_Update(List<TD_ThuchienNhiemvu> list)
+        {
+            try
+            {
+                if (list == null || list.Count == 0) return int.MinValue;
+
+                foreach (TD_ThuchienNhiemvu obj in list)
+                    TD_ThuchienNhiemvu_Update(obj);
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return int.MinValue;
+            }
+        }
+
         #endregion
 
         #region TD_Phancong
@@ -2162,11 +2210,19 @@ namespace QLNhiemvu_WebAPI.DAL
             }
         }
 
-        private TD_Thamdinh_Duyet TD_Thamdinh_Duyet_Entity(DBDM0171 obj)
+        private TD_Thamdinh_Duyet TD_Thamdinh_Duyet_Entity(DBDM0171 obj, bool loadRelated = true)
         {
             try
             {
                 if (obj == null) return null;
+
+                List<TD_Thamdinh_Duyet> listDiff = null;
+                if (loadRelated)
+                {
+                    var temp = db.DBDM0171s.Where(o => o.DM017109 == obj.DM017109);
+                    foreach (DBDM0171 diff in temp)
+                        listDiff.Add(TD_Thamdinh_Duyet_Entity(diff, false));
+                }
 
                 return new TD_Thamdinh_Duyet()
                 {
@@ -2193,6 +2249,7 @@ namespace QLNhiemvu_WebAPI.DAL
                     DM017119 = obj.DM017119,
                     DM017120 = obj.DM017120,
                     DM017121 = obj.DM017121,
+                    DM017122 = obj.DM017122,
                     DonviSudung = All.gs_ten_dv_quanly,
                     Fields = TD_Thamdinh_Duyet_Truongdulieu_GetList(obj.DBDM0167.DBDM0161.DM016101, obj.DM017101, obj.DBDM0167.DM016701),
                     IsChecked = false,
@@ -2209,7 +2266,8 @@ namespace QLNhiemvu_WebAPI.DAL
                         obj.DM017110 == '4' ? "Thẩm định và trình" :
                         "Unknown",
                     Nguoithamdinh = All.gs_user_name,
-                    TrinhduyetNhiemvu = obj.DBDM0167.DM016706
+                    TrinhduyetNhiemvu = obj.DBDM0167.DM016706,
+                    ListDiffBy_Noidung = (listDiff == null || listDiff.Count == 0) ? null : listDiff,
                 };
             }
             catch (Exception ex)
@@ -2449,6 +2507,42 @@ namespace QLNhiemvu_WebAPI.DAL
                     check.DM017204 = field.DM017204;
                     db.SubmitChanges();
                 }
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return int.MinValue;
+            }
+        }
+
+        public int TD_Thamdinh_Duyet_Create(List<TD_Thamdinh_Duyet> list)
+        {
+            try
+            {
+                if (list == null || list.Count == 0) return int.MinValue;
+
+                foreach (TD_Thamdinh_Duyet obj in list)
+                    TD_Thamdinh_Duyet_Create(obj);
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.write(ex);
+                return int.MinValue;
+            }
+        }
+
+        public int TD_Thamdinh_Duyet_Update(List<TD_Thamdinh_Duyet> list)
+        {
+            try
+            {
+                if (list == null || list.Count == 0) return int.MinValue;
+
+                foreach (TD_Thamdinh_Duyet obj in list)
+                    TD_Thamdinh_Duyet_Update(obj);
 
                 return 0;
             }
