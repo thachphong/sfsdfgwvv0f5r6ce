@@ -116,7 +116,8 @@ namespace QLNhiemvu_WebAPI.DAL
                     FieldSelecteds = fieldSelecteds.Count == 0 ? null : fieldSelecteds,
                     DsNoidung = dsNoidung,
                     DsHuongdan = dsHuongdan,
-                    DsCothienthi = string.IsNullOrEmpty(obj.DM016012) ? null : JsonConvert.DeserializeObject<List<TD_ThuchienNhiemvu_Cothienthi>>(obj.DM016012)
+                    DsCothienthi = string.IsNullOrEmpty(obj.DM016012) ? null : JsonConvert.DeserializeObject<List<TD_ThuchienNhiemvu_Cothienthi>>(obj.DM016012),
+                    Phamvisudung = All.dm_loaithutuc_loaicapphep.FirstOrDefault(o => o.ID == obj.DM016005).Description,
                 };
             }
             catch (Exception ex)
@@ -549,6 +550,7 @@ namespace QLNhiemvu_WebAPI.DAL
                     DM016108 = obj.DM016108,
                     DM016109 = obj.DM016109,
                     DM016110 = obj.DM016110,
+                    DM016111 = obj.DM016111 == null ? Guid.Empty : (Guid)obj.DM016111,
                     IsChecked = false,
                     LoaiThutucNhiemvu = obj.DBDM0160.DM016004,
                     Cachnhap = All.dm_loaithutuc_noidung_cachnhap.FirstOrDefault(o => o.ID == obj.DM016105).Description,
@@ -611,10 +613,6 @@ namespace QLNhiemvu_WebAPI.DAL
                 if (checkObj != null)
                     return 1;//Trung Ma so
 
-                checkObj = db.DBDM0161s.FirstOrDefault(o => !o.IsDeleted && o.DM016104 == obj.DM016104);
-                if (checkObj != null)
-                    return 2;//Trung Ten
-
                 db.DBDM0161s.InsertOnSubmit(new DBDM0161()
                 {
                     DM016101 = obj.DM016101,
@@ -627,12 +625,13 @@ namespace QLNhiemvu_WebAPI.DAL
                     DM016108 = obj.DM016108,
                     DM016109 = obj.DM016109,
                     DM016110 = obj.DM016110,
+                    DM016111 = obj.DM016111,
                     IsDeleted = false,
                 });
                 db.SubmitChanges();
 
-                if (obj.DM016105 == '2')
-                    LoaiThutucNhiemvu_Noidung_UpdateFieldSelecteds(obj);
+                if (obj.DM016105 == '2' && obj.DM016111 != Guid.Empty)
+                    LoaiThutucNhiemvu_Noidung_CloneObj(obj);
 
                 return 0;
             }
@@ -640,6 +639,59 @@ namespace QLNhiemvu_WebAPI.DAL
             {
                 Log.write(ex);
                 return int.MinValue;
+            }
+        }
+
+        private void LoaiThutucNhiemvu_Noidung_CloneObj(DM_LoaiThutucNhiemvu_Noidung obj)
+        {
+            try
+            {
+                DBDM0161 noidung = db.DBDM0161s.FirstOrDefault(o => o.DM016101 == obj.DM016111);
+                if (noidung == null) return;
+
+                foreach (DBDM0165 field in noidung.DBDM0165s)
+                {
+                    DBDM0162 clone = new DBDM0162()
+                    {
+                        DM016201 = Guid.NewGuid(),
+                        DM016204 = field.DBDM0162.DM016204 + "-" + obj.DM016103,
+                        DM016205 = field.DBDM0162.DM016205,
+                        DM016206 = field.DBDM0162.DM016206,
+                        DM016207 = field.DBDM0162.DM016207,
+                        DM016208 = field.DBDM0162.DM016208,
+                        DM016209 = field.DBDM0162.DM016209,
+                        DM016210 = field.DBDM0162.DM016210,
+                        DM016213 = field.DBDM0162.DM016213,
+                        DM016214 = field.DBDM0162.DM016214,
+                        DM016215 = field.DBDM0162.DM016215,
+                        DM016216 = field.DBDM0162.DM016216,
+                        DM016217 = obj.DM016106,
+                        DM016218 = DateTime.Now,
+                        DM016219 = obj.DM016106,
+                        DM016220 = DateTime.Now,
+                        DM016221 = field.DBDM0162.DM016201,
+                    };
+
+                    db.DBDM0162s.InsertOnSubmit(clone);
+                    db.SubmitChanges();
+
+                    db.DBDM0165s.InsertOnSubmit(new DBDM0165()
+                    {
+                        DM016501 = Guid.NewGuid(),
+                        DM016502 = obj.DM016101,
+                        DM016503 = clone.DM016201,
+                        DM016504 = obj.DM016106,
+                        DM016505 = DateTime.Now,
+                        DM016506 = obj.DM016106,
+                        DM016507 = DateTime.Now,
+                        IsDeleted = false,
+                    });
+                    db.SubmitChanges();
+                }
+            }
+            catch
+            {
+                return;
             }
         }
 
@@ -654,10 +706,6 @@ namespace QLNhiemvu_WebAPI.DAL
                 if (checkObj != null)
                     return 1;//Trung Ma so
 
-                checkObj = db.DBDM0161s.FirstOrDefault(o => !o.IsDeleted && o.DM016101 != obj.DM016101 && o.DM016104 == obj.DM016104);
-                if (checkObj != null)
-                    return 2;//Trung Ten
-
                 updateObj.DM016102 = obj.DM016102;
                 updateObj.DM016103 = obj.DM016103;
                 updateObj.DM016104 = obj.DM016104;
@@ -665,6 +713,7 @@ namespace QLNhiemvu_WebAPI.DAL
                 updateObj.DM016108 = obj.DM016108;
                 updateObj.DM016109 = obj.DM016109;
                 updateObj.DM016110 = obj.DM016110;
+                updateObj.DM016111 = obj.DM016111;
                 db.SubmitChanges();
 
                 if (obj.DM016105 == '2')
@@ -820,6 +869,7 @@ namespace QLNhiemvu_WebAPI.DAL
                     DM016218 = obj.DM016218,
                     DM016219 = obj.DM016219,
                     DM016220 = obj.DM016220,
+                    DM016221 = obj.DM016221 == null ? Guid.Empty : (Guid)obj.DM016221,
                     IsChecked = false,
                     Cachnhap = string.Empty,
                     Kieutruong = All.dm_loaithutuc_truongdulieu_kieutruong.FirstOrDefault(o => o.ID.Trim() == obj.DM016207.Trim()).Description,
@@ -888,10 +938,6 @@ namespace QLNhiemvu_WebAPI.DAL
                 if (checkObj != null)
                     return 1;//Trung Ma so
 
-                checkObj = db.DBDM0162s.FirstOrDefault(o => !o.IsDeleted && o.DM016205 == obj.DM016205);
-                if (checkObj != null)
-                    return 2;//Trung Ten
-
                 db.DBDM0162s.InsertOnSubmit(new DBDM0162()
                 {
                     DM016201 = obj.DM016201,
@@ -910,6 +956,7 @@ namespace QLNhiemvu_WebAPI.DAL
                     DM016219 = obj.DM016219,
                     DM016220 = obj.DM016220,
                     DM016216 = obj.DM016216,
+                    DM016221 = obj.DM016221,
                     IsDeleted = false,
                 });
                 db.SubmitChanges();
@@ -1012,10 +1059,6 @@ namespace QLNhiemvu_WebAPI.DAL
                 if (checkObj != null)
                     return 1;//Trung Ma so
 
-                checkObj = db.DBDM0162s.FirstOrDefault(o => !o.IsDeleted && o.DM016201 != obj.DM016201 && o.DM016205 == obj.DM016205);
-                if (checkObj != null)
-                    return 2;//Trung Ten
-
                 updateObj.DM016204 = obj.DM016204;
                 updateObj.DM016205 = obj.DM016205;
                 updateObj.DM016206 = obj.DM016206;
@@ -1029,6 +1072,7 @@ namespace QLNhiemvu_WebAPI.DAL
                 updateObj.DM016219 = obj.DM016219;
                 updateObj.DM016220 = obj.DM016220;
                 updateObj.DM016216 = obj.DM016216;
+                updateObj.DM016221 = obj.DM016221;
                 db.SubmitChanges();
 
                 //if (obj.DM016207.Trim() == "9")
@@ -2542,7 +2586,9 @@ namespace QLNhiemvu_WebAPI.DAL
                 if (list == null || list.Count == 0) return int.MinValue;
 
                 foreach (TD_Thamdinh_Duyet obj in list)
-                    TD_Thamdinh_Duyet_Update(obj);
+                {
+                    //TD_Thamdinh_Duyet current = TD_Thamdinh_Duyet_Update(obj);
+                }
 
                 return 0;
             }

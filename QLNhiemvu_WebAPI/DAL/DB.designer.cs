@@ -869,6 +869,8 @@ namespace QLNhiemvu_WebAPI.DAL
 		
 		private bool _IsDeleted;
 		
+		private System.Nullable<System.Guid> _DM016111;
+		
 		private EntitySet<DBDM0165> _DBDM0165s;
 		
 		private EntitySet<DBDM0167> _DBDM0167s;
@@ -905,6 +907,8 @@ namespace QLNhiemvu_WebAPI.DAL
     partial void OnDM016110Changed();
     partial void OnIsDeletedChanging(bool value);
     partial void OnIsDeletedChanged();
+    partial void OnDM016111Changing(System.Nullable<System.Guid> value);
+    partial void OnDM016111Changed();
     #endregion
 		
 		public DBDM0161()
@@ -1141,6 +1145,26 @@ namespace QLNhiemvu_WebAPI.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016111", DbType="UniqueIdentifier NULL")]
+		public System.Nullable<System.Guid> DM016111
+		{
+			get
+			{
+				return this._DM016111;
+			}
+			set
+			{
+				if ((this._DM016111 != value))
+				{
+					this.OnDM016111Changing(value);
+					this.SendPropertyChanging();
+					this._DM016111 = value;
+					this.SendPropertyChanged("DM016111");
+					this.OnDM016111Changed();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DBDM0161_DBDM0165", Storage="_DBDM0165s", ThisKey="DM016101", OtherKey="DM016502")]
 		public EntitySet<DBDM0165> DBDM0165s
 		{
@@ -1336,6 +1360,8 @@ namespace QLNhiemvu_WebAPI.DAL
 		
 		private System.Guid _DM016216;
 		
+		private System.Nullable<System.Guid> _DM016221;
+		
 		private EntitySet<DBDM0164> _DBDM0164s;
 		
 		private EntitySet<DBDM0165> _DBDM0165s;
@@ -1378,6 +1404,8 @@ namespace QLNhiemvu_WebAPI.DAL
     partial void OnIsDeletedChanged();
     partial void OnDM016216Changing(System.Guid value);
     partial void OnDM016216Changed();
+    partial void OnDM016221Changing(System.Nullable<System.Guid> value);
+    partial void OnDM016221Changed();
     #endregion
 		
 		public DBDM0162()
@@ -1723,6 +1751,26 @@ namespace QLNhiemvu_WebAPI.DAL
 					this._DM016216 = value;
 					this.SendPropertyChanged("DM016216");
 					this.OnDM016216Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DM016221", DbType="UniqueIdentifier NULL")]
+		public System.Nullable<System.Guid> DM016221
+		{
+			get
+			{
+				return this._DM016221;
+			}
+			set
+			{
+				if ((this._DM016221 != value))
+				{
+					this.OnDM016221Changing(value);
+					this.SendPropertyChanging();
+					this._DM016221 = value;
+					this.SendPropertyChanged("DM016221");
+					this.OnDM016221Changed();
 				}
 			}
 		}

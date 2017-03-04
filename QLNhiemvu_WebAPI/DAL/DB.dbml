@@ -34,6 +34,7 @@
       <Column Name="DM016109" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="DM016110" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DM016111" Type="System.Guid" DbType="UniqueIdentifier NULL" CanBeNull="true" />
       <Association Name="DBDM0161_DBDM0165" Member="DBDM0165s" ThisKey="DM016101" OtherKey="DM016502" Type="DBDM0165" />
       <Association Name="DBDM0161_DBDM0167" Member="DBDM0167s" ThisKey="DM016101" OtherKey="DM016713" Type="DBDM0167" />
       <Association Name="DBDM0161_DBDM0173" Member="DBDM0173s" ThisKey="DM016101" OtherKey="DM017312" Type="DBDM0173" />
@@ -60,6 +61,7 @@
       <Column Name="DM016220" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="DM016216" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="DM016221" Type="System.Guid" DbType="UniqueIdentifier NULL" CanBeNull="true" />
       <Association Name="DBDM0162_DBDM0164" Member="DBDM0164s" ThisKey="DM016201" OtherKey="DM016403" Type="DBDM0164" />
       <Association Name="DBDM0162_DBDM0165" Member="DBDM0165s" ThisKey="DM016201" OtherKey="DM016503" Type="DBDM0165" />
     </Type>

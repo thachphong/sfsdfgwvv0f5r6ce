@@ -212,12 +212,12 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\ThutucNhiemvu\Huongdan\" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="DAL\DB.dbml.layout">
       <DependentUpon>DB.dbml</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\ThutucNhiemvu\Huongdan\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
